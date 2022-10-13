@@ -2,16 +2,17 @@
 const PostRecette = {
     //Ici ce sont les données liés à un post
     props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id",],
-}
-export default {
-    PostRecette,
-    methods: {
-        clikckCom: function(){
-//arret ici
-        }
+};
+export default PostRecette;
+// export default {
+//     props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id",],
+//     methods: {
+//         clikckCom: function(){
+// //arret ici
+//         }
 
-    },
-}
+//     },
+// }
 </script>
 
 <template>
