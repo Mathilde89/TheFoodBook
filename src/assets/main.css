@@ -1,0 +1,11 @@
+*{
+  box-sizing: border-box;
+}
+body, html{
+  display: flex;
+  margin: O;
+  padding: 0;
+}
+a:visited{
+  color: inherit;
+}
