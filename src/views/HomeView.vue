@@ -1,11 +1,20 @@
 <script setup>
-import TheWelcome from "../components/TheWelcome.vue";
+
 </script>
 
 <template>
-  <main>
-    <h1>CA MARCHE</h1>
-    <p>nabil est vraiment une personne extra</p>
-    <TheWelcome />
-  </main>
+
+<header>
+  <div class="NavBar">
+    <nav>
+      <RouterLink to="/inscription">Inscription</RouterLink>
+      <RouterLink to="/connexion">Connexion</RouterLink>
+    </nav>
+  </div>
+</header>
+
 </template>
+
+<style lang="scss">
+
+</style>
