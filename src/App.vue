@@ -36,12 +36,12 @@ import { RouterLink, RouterView } from "vue-router";
   font-family: 'Cantata One', serif;
 }
 #app{
-  width: 100%;
+  width: 100vw;
 }
 body{
   display: flex;
   margin: 0;
-  width: 100%;
+  width: 100vw;
   
 }
 .navBar{
