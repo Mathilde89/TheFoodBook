@@ -10,29 +10,8 @@
             </div>
         </form>
     </div>
-<<<<<<< HEAD
 
     <RouterLink to="/thefoodbook">FoodBook</RouterLink>
 
 
   </template>
-=======
-</template>
-
-<style lang="scss" scoped>
-
-$colorPrimary:#A52A2A;
-.formConnex{
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-}
-input{
-  margin: 10px;
-  padding: 10px 20px;
-}
-h1{
-  color:$colorPrimary;
-}
-</style>
->>>>>>> brancheConnexion
