@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import FoodBookView from './views/FoodBookView.vue'
+import InscriptionView from './views/InscriptionView.vue'
 import FooterContent from './components/FooterContent.vue'
 </script>
 
@@ -47,7 +48,7 @@ export default {
         <img class="logoNav" src="../src/img/logo.png">
         <RouterLink class="routerLink" to="/">Home</RouterLink>
         <a href="#cardContainer">Posts</a>
-        <RouterLink class="routerLink" to="/inscription">join/log</RouterLink>
+        <RouterLink class="routerLink" to="./InscriptionView.vue">join/log</RouterLink>
       </nav>
     </div>
   </header>
@@ -61,7 +62,9 @@ export default {
 
  <div class="cardContainer" id="cardContainer">
 
+
   <FoodBookView/>
+  <InscriptionView/>
 
  </div>
   
