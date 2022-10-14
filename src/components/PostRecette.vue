@@ -1,8 +1,27 @@
 <script>
+
 const PostRecette = {
+    data() {
+        return {
+            // bool est utilisé pour afficher la liste des posts quand clique sur le bouton
+            bool: false,
+
+        };
+    },
+
     //Ici ce sont les données liés à un post
-    props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id",],
-};
+    props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id", "listcompost"],
+
+    methods: {
+        //Fonction pour afficher ou non la div contenant la liste des postss
+        clickCom: function () {
+            if (this.bool == true) {
+                this.bool = false;
+            } else
+                this.bool = true;
+        }
+    },
+}
 export default PostRecette;
 // export default {
 //     props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id",],
@@ -30,7 +49,7 @@ export default PostRecette;
         </div>
         <div class="footerpost">
             <div class="like">
-                <button class="buttonlike">
+                <button>
                     <i class="fa-solid fa-heart"></i>
                 </button>
                 <div class="nblike">
@@ -38,7 +57,7 @@ export default PostRecette;
                 </div>
             </div>
             <div class="com">
-                <button class="buttoncom">
+                <button @click="clickCom" class="buttoncom">
                     <i class="fa-solid fa-comments"></i>
                 </button>
                 <div class="nbcom">
@@ -47,13 +66,34 @@ export default PostRecette;
 
             </div>
 
-           
+
 
         </div>
+    </div>
+    <div v-if="bool" class="listcomcontainer">
+        <form action="">
+            <input type="text" placeholder="A vos commentaires!">
+            <button  class="buttoncomvalid">
+                <i class="fa-solid fa-share"></i>
+                </button>
+        </form>
         <div class="listcom">
-                Liste com
 
-            </div>
+           <div class="auteurdate">
+            
+               <h1>{{auteur}}</h1> a écrit le {{date}} à {{heure}} :
+
+           </div>
+           <p>
+               {{listcompost}}
+           </p> 
+            
+        </div>
+     
+       
+        
+
+
     </div>
 </template>
 
@@ -71,15 +111,15 @@ $colorPrimary: #A52A2A;
 $colorGreyLight: #D3D3D3;
 $colorGreyMedium: #A9A9A9;
 $colorGreyDark: #353535;
-$taillewidhtpost:500px;
+$taillewidhtpost: 500px;
 
 .post {
     width: $taillewidhtpost;
-    height: 400px;
+    height: 300px;
     background-color: $colorGreyLight;
     padding: 20px;
-    margin: 20px;
-    border-radius: 20px;
+    margin: 5px 20px;
+    border-radius: 10px;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
 
@@ -90,10 +130,10 @@ $taillewidhtpost:500px;
 }
 
 .recette {
-    height: 80%;
+    height: 70%;
     width: 100%;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 10px;
 
     p {
         padding: 10px;
@@ -102,7 +142,7 @@ $taillewidhtpost:500px;
 }
 
 .footerpost {
-    height: auto;
+    height: 20%;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -132,7 +172,7 @@ $taillewidhtpost:500px;
 button {
     width: 40px;
     height: 40px;
-    margin: 10px;
+    margin: 5px;
     justify-content: flex-end;
     display: block;
     color: #fff;
@@ -144,7 +184,15 @@ button {
     border-radius: 5px;
     transition: 0.2s ease-in;
     cursor: pointer;
+
+    &:hover {
+        color: $colorGreyDark;
+        background: white;
+        border: $colorGreyDark 1px solid;
+
+    }
 }
+
 
 .nblike {
 
@@ -161,13 +209,51 @@ button {
     width: 40%;
     color: $colorGreyDark;
 }
-.listcom{
+
+.listcomcontainer {
     width: $taillewidhtpost;
     height: 200px;
-    background-color: #A52A2A;
+    border: 1px solid $colorPrimary;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+.listcom{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $colorPrimary;
+    padding: 5px;
+    border-radius: 10px;
+    h1{
+        font-size: 15px;
+        margin-right: 10px;
+    }
 
+}
+.auteurdate{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 12px;
+    
+}
 
+input{
+    width: 85%;
+    height: 40px;
+    border: 1px solid $colorGreyDark;
+    border-radius: 10px;
+    outline: none;
+    padding: 5px;
+    
+}
+form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    
 }
 </style>

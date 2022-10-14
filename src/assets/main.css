@@ -1,9 +1,15 @@
-*{
-  box-sizing: border-box;
+@import "./base.css";
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  font-weight: normal;
 }
 body, html{
   display: flex;
-  margin: O;
+  margin: 0;
   padding: 0;
   @import url('https://fonts.googleapis.com/css2?family=Cantata+One&display=swap');
   font-family: 'Cantata One', serif;
