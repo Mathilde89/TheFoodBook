@@ -27,44 +27,6 @@
   </body>
 </template>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <style scoped>
 body {
   margin: 0;
@@ -158,5 +120,3 @@ button:hover {
   transform: scale(0.6);
 }
 </style>
-
-
