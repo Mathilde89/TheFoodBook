@@ -1,20 +1,57 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
+import FoodBookView from './views/FoodBookView.vue'
+import FooterContent from './components/FooterContent.vue'
+</script>
+
+<script>
+
+export default {
+  data() {
+    return {
+      email: "test@test.com",
+      password: "test",
+      result: null,
+      token: "",
+    };
+  },
+  
+  methods:{
+    async register(){
+      const options = {
+        method: "register",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          firstname: firstname,
+          lastname: lastname,
+          
+          
+        }),
+      };
+      const response = await fetch(" https://social-networkapi.osc-fr1.scalingo.io/demo/register ", options);
+      const data = await response.json();
+    },
+    },
+  };
+    
 </script>
 
 <template>
   <header>
     <div class="navBar">
-      <nav>
-        <img src="../src/img/logo.png">
+      <nav class="navCss">
+        <img class="logoNav" src="../src/img/logo.png">
         <RouterLink class="routerLink" to="/">Home</RouterLink>
-        <RouterLink class="routerLink" to="/about">About</RouterLink>
-        <RouterLink class="routerLink" to="/inscription">Inscription</RouterLink>
-        <RouterLink class="routerLink" to="/connexion">Connexion</RouterLink>
+        <a href="#cardContainer">Posts</a>
+        <RouterLink class="routerLink" to="/inscription">join/log</RouterLink>
       </nav>
     </div>
-    
   </header>
+
   <div>
     <div class="image-main">
       <img src="../src/img/logo.png">
@@ -22,10 +59,18 @@ import { RouterLink, RouterView } from "vue-router";
     </div>
   </div>
 
-  <RouterView />
-  <div class="cardContent">
-    
-  </div>
+ <div class="cardContainer" id="cardContainer">
+
+  <FoodBookView/>
+
+ </div>
+  
+ <footer>
+  <FooterContent/>
+
+ </footer>
+
+  
 </template>
 
 <style lang="scss" scoped>
@@ -35,8 +80,11 @@ import { RouterLink, RouterView } from "vue-router";
   
   font-family: 'Cantata One', serif;
 }
+
 #app{
   width: 100vw;
+  padding: 0;
+  margin: 0;
 }
 body{
   display: flex;
@@ -47,49 +95,50 @@ body{
 .navBar{
   @import url('https://fonts.googleapis.com/css2?family=Cantata+One&display=swap');
   font-family: 'Cantata One', serif;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  justify-items: center;
+  
   background-color: #D3D3D3;
   color: black;
   font-weight: bold;
   font-size: 1.5em;
-  width: 100%;
+  width: 100vw;
   height: 60px;
-  align-items: center;
   border-bottom: 2px solid black;
-  align-content: center;
   text-transform: uppercase;
+
+  a{
+    text-decoration: none;
+  }
+  
+  
  
-  nav{
+  .navCss{
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-items: center;
+    justify-content: space-around;
+    
     
   }
 
   
   .routerLink{
+    display: flex;
     text-decoration: none;
-    margin-right: 200px;
     align-items: center;
+    justify-content: space-between;
+
     &:hover {
       background-color: red;
       color: white;
       border-radius: 5px;
     }
-    
-    
-   
-    
   }
+ 
   
-  img{
+  .logoNav{
+    display: flex;
     width: 55px;
     height: 55px;
-    margin-right: 200px;
     margin-bottom: -3px;
     border-radius: 75px;
     
@@ -104,6 +153,7 @@ body{
     flex-direction: column;
     height: 600px;
     border-top: 0;
+    width: 100vw;
     align-items: center;
     justify-content: center;
   h1{
@@ -121,6 +171,26 @@ body{
     border-radius: 75px;
   }  
 }
+.cardContainer{
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+}
+footer{
+  width: 100vw;
+  background-color: #D3D3D3;
+  color: #a52a2a;
+  font-weight: bold;
+  font-size: 1em;
+  width: 100vw;
+  height: 60px;
+  border-bottom: 2px solid black;
+  text-transform: uppercase;
+  text-align: center;
+  
+
+  
+  }
 
 </style>
 
