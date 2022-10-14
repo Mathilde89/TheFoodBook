@@ -1,14 +1,52 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import FoodBookView from './views/FoodBookView.vue'
+import FooterContent from './components/FooterContent.vue'
+</script>
+
+<script>
+
+export default {
+  data() {
+    return {
+      email: "test@test.com",
+      password: "test",
+      result: null,
+      token: "",
+    };
+  },
+  
+  methods:{
+    async register(){
+      const options = {
+        method: "register",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          firstname: firstname,
+          lastname: lastname,
+          
+          
+        }),
+      };
+      const response = await fetch(" https://social-networkapi.osc-fr1.scalingo.io/demo/register ", options);
+      const data = await response.json();
+    },
+    },
+  };
+    
 </script>
 
 <template>
   <header>
     <div class="navBar">
       <nav class="navCss">
-        <RouterLink class="routerLink" to="/">Home</RouterLink>
         <img class="logoNav" src="../src/img/logo.png">
+        <RouterLink class="routerLink" to="/">Home</RouterLink>
+        <a href="#cardContainer">Posts</a>
         <RouterLink class="routerLink" to="/inscription">join/log</RouterLink>
       </nav>
     </div>
@@ -21,12 +59,16 @@ import FoodBookView from './views/FoodBookView.vue'
     </div>
   </div>
 
- <div class="cardContainer">
+ <div class="cardContainer" id="cardContainer">
 
   <FoodBookView/>
 
  </div>
   
+ <footer>
+  <FooterContent/>
+
+ </footer>
 
   
 </template>
@@ -62,6 +104,10 @@ body{
   height: 60px;
   border-bottom: 2px solid black;
   text-transform: uppercase;
+
+  a{
+    text-decoration: none;
+  }
   
   
  
@@ -130,6 +176,21 @@ body{
   flex-direction: row;
   margin-top: 30px;
 }
+footer{
+  width: 100vw;
+  background-color: #D3D3D3;
+  color: #a52a2a;
+  font-weight: bold;
+  font-size: 1em;
+  width: 100vw;
+  height: 60px;
+  border-bottom: 2px solid black;
+  text-transform: uppercase;
+  text-align: center;
+  
+
+  
+  }
 
 </style>
 
