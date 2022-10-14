@@ -14,6 +14,10 @@ const testposterecette1 = {
   nblike1: "10",
   nbcom1: "30",
   id1: "test1",
+  post1a:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  post1b:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  post1c:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+
 };
 const testposterecette2 = {
   auteur2: "Titin Milou",
@@ -25,6 +29,9 @@ const testposterecette2 = {
   nblike2: "1",
   nbcom2: "1",
   id2: "test2",
+  post2a:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  post2b:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  post2c:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
 };
 const testposterecette3 = {
   auteur3: "Juste Leblanc",
@@ -36,6 +43,9 @@ const testposterecette3 = {
   nblike3: "42",
   nbcom3: "20",
   id3: "test3",
+  post3a:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  post3b:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  post3c:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
 };
 
 export default {
@@ -52,7 +62,7 @@ export default {
 <template>
   <!-- ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id", ], -->
   <PostRecette
-    :auteur="auteur1"
+    :auteur="testposterecette1.auteur1"
     :titre="testposterecette1.titre1"
     :recette="testposterecette1.recette1"
     :date="testposterecette1.date1"
@@ -60,9 +70,10 @@ export default {
     :nblike="testposterecette1.nblike1"
     :nbcom="testposterecette1.nbcom1"
     :id="testposterecette1.id1"
+    :listcompost="testposterecette1.post1a"
   />
   <PostRecette
-    :auteur="auteur2"
+    :auteur="testposterecette2.auteur2"
     :titre="testposterecette2.titre2"
     :recette="testposterecette2.recette2"
     :date="testposterecette2.date2"
@@ -70,9 +81,11 @@ export default {
     :nblike="testposterecette2.nblike2"
     :nbcom="testposterecette2.nbcom2"
     :id="testposterecette2.id2"
+    :listcompost="testposterecette2.post2a"
+
   />
-  <PostRecette
-    :auteur="auteur3"
+<PostRecette
+    :auteur="testposterecette3.auteur3"
     :titre="testposterecette3.titre3"
     :recette="testposterecette3.recette3"
     :date="testposterecette3.date3"
@@ -80,5 +93,6 @@ export default {
     :nblike="testposterecette3.nblike3"
     :nbcom="testposterecette3.nbcom3"
     :id="testposterecette3.id3"
-  />
+    :listcompost="testposterecette3.post3a"
+  /> 
 </template>
