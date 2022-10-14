@@ -28,7 +28,7 @@ import { RouterLink, RouterView } from "vue-router";
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 *{
   box-sizing: border-box;
