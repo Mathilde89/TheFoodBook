@@ -5,33 +5,31 @@ const PostRecette = {
         return {
             // bool est utilisé pour afficher la liste des posts quand clique sur le bouton
             bool: false,
-
-        };
+            addlike:this.nblike,
+            
+          };
     },
 
     //Ici ce sont les données liés à un post
     props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id", "listcompost"],
 
     methods: {
-        //Fonction pour afficher ou non la div contenant la liste des postss
+        //Fonction pour afficher ou non la div contenant la liste des posts
         clickCom: function () {
             if (this.bool == true) {
                 this.bool = false;
             } else
                 this.bool = true;
+        },
+        //Fonction pour augmenter le nombre de like
+        clickLike: function () {          
+            this.addlike++
+                
         }
     },
 }
 export default PostRecette;
-// export default {
-//     props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id",],
-//     methods: {
-//         clikckCom: function(){
-// //arret ici
-//         }
 
-//     },
-// }
 </script>
 
 <template>
@@ -49,11 +47,11 @@ export default PostRecette;
         </div>
         <div class="footerpost">
             <div class="like">
-                <button>
+                <button @click="clickLike">
                     <i class="fa-solid fa-heart"></i>
                 </button>
                 <div class="nblike">
-                    {{nblike}} <i class="fa-solid fa-heart"></i>
+                    {{addlike}} <i class="fa-solid fa-heart"></i>
                 </div>
             </div>
             <div class="com">
