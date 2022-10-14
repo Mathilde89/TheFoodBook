@@ -1,3 +1,21 @@
+<script>
+const List = {
+  data() {
+    return {
+      infoUser: { lastName: "", firstName: "", email: "", password: "" },
+      ListUser: [],
+    };
+  },
+  methods: {
+    submit(e) {
+      e.preventDefault();
+      console.log("infoUser", this.infoUser);
+    },
+  },
+};
+export default List;
+</script>
+
 <template>
   <head> </head>
   <body>
@@ -7,11 +25,31 @@
       <div class="signup">
         <form>
           <label for="chk" aria-hidden="true">Inscription:</label>
-          <input type="text" name="txt" placeholder="Nom" />
-          <input type="text" name="txt" placeholder="Prenom" />
-          <input type="email" name="email" placeholder="Email" />
-          <input type="password" name="pswd" placeholder="Mot De Passe" />
-          <button>valider</button>
+          <input
+            v-model="this.infoUser.lastName"
+            type="text"
+            name="txt"
+            placeholder="Nom"
+          />
+          <input
+            v-model="this.infoUser.firstName"
+            type="text"
+            name="txt"
+            placeholder="Prenom"
+          />
+          <input
+            v-model="this.infoUser.email"
+            type="email"
+            name="email"
+            placeholder="Email"
+          />
+          <input
+            v-model="this.infoUser.password"
+            type="password"
+            name="pswd"
+            placeholder="Mot De Passe"
+          />
+          <button @click="submit">valider</button>
         </form>
       </div>
 
@@ -20,11 +58,10 @@
           <label for="chk" aria-hidden="true">connexion</label>
           <input type="email" name="email" placeholder="Email" />
           <input type="password" name="pswd" placeholder="Mot De Passe" />
-          <button>Connexion</button>
+          <button @click="submitco">Connexion</button>
         </form>
       </div>
     </div>
-    huhu
   </body>
 </template>
 
@@ -42,10 +79,10 @@ body {
 .main {
   width: 350px;
   height: 500px;
-  background: red;
+  background: #a9a9a9;
   overflow: hidden;
-  background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38")
-    no-repeat center/ cover;
+  /* background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38")
+    no-repeat center/ cover; */
   border-radius: 10px;
   box-shadow: 5px 20px 50px #000;
 }
