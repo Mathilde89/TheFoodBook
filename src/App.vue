@@ -25,7 +25,7 @@ export default {
         <img class="logoNav" src="../src/img/logo.png">
         <RouterLink class="routerLink" to="/">Home</RouterLink>
         <a href="#cardContainer">Posts</a>
-        <RouterLink class="routerLink" to="/inscription">join/log</RouterLink>
+        <RouterLink  class="routerLink" to="/inscription">join/log</RouterLink> 
         
       </nav>
     </div>
@@ -34,7 +34,8 @@ export default {
   <div>
     <div class="image-main">
       <img src="../src/img/logo.png">
-      <h1>VOTRE RESEAU SOCIAL CULINAIRE PREFERE</h1>
+      <h1>FOODBOOK</h1>
+      <p>votre réseau social culinaire préferé</p> 
     </div>
   </div>
   
@@ -54,17 +55,24 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-
+@font-face {
+      font-family: "mardesauve";
+      src: url('fonts/marde sauve.otf');
+}
+@font-face {
+  font-family: "OperatorMono";
+  src: url(fonts/OperatorMono-BoldItalic.otf);
+}
 *{
   box-sizing: border-box;
   
-  font-family: 'Cantata One', serif;
 }
 
 #app{
   width: 100vw;
   padding: 0;
   margin: 0;
+  
 }
 body{
   display: flex;
@@ -73,16 +81,13 @@ body{
   
 }
 .navBar{
-  @import url('https://fonts.googleapis.com/css2?family=Cantata+One&display=swap');
-  font-family: 'Cantata One', serif;
-  
   background-color: #D3D3D3;
   color: black;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 1.7em;
   width: 100vw;
   height: 60px;
-  border-bottom: 2px solid black;
+  border-bottom: 5px solid rgb(7, 69, 2);
   text-transform: uppercase;
 
   a{
@@ -108,42 +113,58 @@ body{
     justify-content: space-between;
 
     &:hover {
-      background-color: red;
+      background-color: rgb(7, 69, 2);
       color: white;
       border-radius: 5px;
     }
+   
   }
- 
+  a:hover {
+    background-color: rgb(7, 69, 2);
+    color: white;
+    border-radius: 5px;
+    }
   
   .logoNav{
     display: flex;
-    width: 55px;
-    height: 55px;
-    margin-bottom: -3px;
+    width: 50px;
+    height: 50px;
     border-radius: 75px;
-    
+    margin-top: 2px;
   }
 
 }
 
 .image-main{
     background-image: url(../src/img/main.jpg);
+    background-position: center;
+    background-size: cover;
     text-align: center;
     display: flex;
     flex-direction: column;
-    height: 600px;
+    height: 500px;
     border-top: 0;
     width: 100vw;
     align-items: center;
     justify-content: center;
+    border-bottom: 5px solid rgb(7, 69, 2);
   h1{
+    
     display: flex;
     text-align: center;
     font-size: 3em;
-    color: black;
+    color: rgb(7, 69, 2);
     margin: 0;
-    font-family: 'Cantata One', serif;
     text-shadow: 0 0 3px white;
+    font-family: 'mardesauve', sans-serif;
+  }
+  p{
+
+    font-size: large;
+    font-weight: 700;
+    font-style: italic;
+    font-family: 'mardesauve', sans-serif;
+    text-transform: uppercase;
   }
   img{
     width: 150px;
@@ -159,7 +180,7 @@ body{
 footer{
   width: 100vw;
   background-color: #D3D3D3;
-  color: #a52a2a;
+  color: rgb(7, 69, 2);
   font-weight: bold;
   font-size: 1em;
   width: 100vw;

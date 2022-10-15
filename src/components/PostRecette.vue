@@ -113,6 +113,7 @@ $taillewidhtpost: 500px;
 
 .post {
     width: $taillewidhtpost;
+    text-align: center;
     height: 300px;
     background-color: $colorGreyLight;
     padding: 20px;
@@ -125,6 +126,7 @@ $taillewidhtpost: 500px;
     color: $colorPrimary;
     height: 10%;
     width: 100%;
+    font-size: larger;
 }
 
 .recette {
@@ -163,6 +165,7 @@ $taillewidhtpost: 500px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    
 
 
 }
@@ -184,7 +187,7 @@ button {
     cursor: pointer;
 
     &:hover {
-        color: $colorGreyDark;
+        color: $colorPrimary;
         background: white;
         border: $colorGreyDark 1px solid;
 
@@ -197,7 +200,7 @@ button {
     align-items: center;
     vertical-align: flex-start;
     width: 40%;
-    color: $colorGreyDark;
+    color: #A52A2A;
 }
 
 .com {
