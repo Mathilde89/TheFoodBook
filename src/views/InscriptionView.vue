@@ -2,18 +2,47 @@
 const List = {
   data() {
     return {
-      infoUser: { lastName: "", firstName: "", email: "", password: "" },
+      infoUser: { lastName: "", firstName: "", email: "", password: "",result: null, token: "",},
       ListUser: [],
+      
+      
     };
   },
   methods: {
-    submit(e) {
-      e.preventDefault();
-      console.log("infoUser", this.infoUser);
+    
+    GetRegister : async function () {
+     
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: this.infoUser.email,
+          password: this.infoUser.password,
+          firstname: this.infoUser.firstName,
+          lastname: this.infoUser.lastName,         
+        }),
+        };
+        const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/register",options);
+      const data = await response.json();
+      console.log("data", data)
+      // this.infoUser.$slotsresult = data.success;
+      // if (data.success === true) {
+        //   this.infoUser.token = data.token;
+        // }
+        
+      },
+      
+      handleInput(e) {
+        e.preventDefault();
+        console.log("infoUser", this.infoUser);
+       
+      },
     },
-  },
-};
-export default List;
+  };
+
+  export default List;
 </script>
 
 <template>
@@ -23,7 +52,7 @@ export default List;
       <input type="checkbox" id="chk" aria-hidden="true" />
 
       <div class="signup">
-        <form>
+        <form @submit.prevent="GetRegister()">
           <label for="chk" aria-hidden="true">Inscription:</label>
           <input
             v-model="this.infoUser.lastName"
@@ -49,7 +78,8 @@ export default List;
             name="pswd"
             placeholder="Mot De Passe"
           />
-          <button @click="submit">valider</button>
+          <button   type="submit">valider</button>
+          <!-- @click="handleInput" -->
         </form>
       </div>
 

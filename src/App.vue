@@ -1,8 +1,7 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
-import FoodBookView from './views/FoodBookView.vue'
-import InscriptionView from './views/InscriptionView.vue'
 import FooterContent from './components/FooterContent.vue'
+import FoodBookView from "./views/FoodBookView.vue";
 </script>
 
 <script>
@@ -10,33 +9,11 @@ import FooterContent from './components/FooterContent.vue'
 export default {
   data() {
     return {
-      email: "test@test.com",
-      password: "test",
-      result: null,
-      token: "",
+     
     };
   },
   
-  methods:{
-    async register(){
-      const options = {
-        method: "register",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          firstname: firstname,
-          lastname: lastname,
-          
-          
-        }),
-      };
-      const response = await fetch(" https://social-networkapi.osc-fr1.scalingo.io/demo/register ", options);
-      const data = await response.json();
-    },
-    },
+  
   };
     
 </script>
@@ -48,32 +25,32 @@ export default {
         <img class="logoNav" src="../src/img/logo.png">
         <RouterLink class="routerLink" to="/">Home</RouterLink>
         <a href="#cardContainer">Posts</a>
-        <RouterLink class="routerLink" to="./InscriptionView.vue">join/log</RouterLink>
+        <RouterLink class="routerLink" to="/inscription">join/log</RouterLink>
+        
       </nav>
     </div>
   </header>
-
+  
   <div>
     <div class="image-main">
       <img src="../src/img/logo.png">
       <h1>VOTRE RESEAU SOCIAL CULINAIRE PREFERE</h1>
     </div>
   </div>
-
- <div class="cardContainer" id="cardContainer">
-
-
-  <FoodBookView/>
-  <InscriptionView/>
-
- </div>
   
+  <RouterView />
+  <div class="cardContainer" id="cardContainer">
+   <FoodBookView/>
+
+
+   
+</div>
+
  <footer>
   <FooterContent/>
 
  </footer>
 
-  
 </template>
 
 <style lang="scss" scoped>
