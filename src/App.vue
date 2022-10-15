@@ -155,7 +155,7 @@ body{
     font-size: 3em;
     color: rgb(7, 69, 2);
     margin: 0;
-    text-shadow: 0 0 3px white;
+    
     font-family: 'mardesauve', sans-serif;
   }
   p{
@@ -165,6 +165,7 @@ body{
     font-style: italic;
     font-family: 'mardesauve', sans-serif;
     text-transform: uppercase;
+    text-shadow: -2px 3px 0px white;
   }
   img{
     width: 150px;
@@ -182,16 +183,25 @@ footer{
   background-color: #D3D3D3;
   color: rgb(7, 69, 2);
   font-weight: bold;
-  font-size: 1em;
-  width: 100vw;
+  font-size: 0.8em;
   height: 60px;
   border-bottom: 2px solid black;
   text-transform: uppercase;
   text-align: center;
-  
-
-  
+  border-top: 3.5px solid rgb(7, 69, 2);
+  h3{
+    margin-top: -2px;
+    margin-bottom: 0%;
+    border-top: 0px;
+    padding: 0%;
   }
+  p{
+    margin: 0%;
+    padding: 0%;
+    border: 0px;
+  }
+  
+}
 
 </style>
 
