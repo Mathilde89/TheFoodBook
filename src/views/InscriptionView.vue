@@ -1,17 +1,19 @@
 <script>
-const List = {
+
+export default  {
   data() {
     return {
-      infoUser: { lastName: "", firstName: "", email: "", password: "",result: null, token: "",},
+      infoUser: { lastName: "", firstName: "", email: "", password: "", result: null, token: "", },
       ListUser: [],
-      
-      
+
+
     };
   },
   methods: {
-    
-    GetRegister : async function () {
-     
+
+    // Requete pour s'enregistrer
+    GetRegister: async function () {
+
       const options = {
         method: "POST",
         headers: {
@@ -21,79 +23,93 @@ const List = {
           email: this.infoUser.email,
           password: this.infoUser.password,
           firstname: this.infoUser.firstName,
-          lastname: this.infoUser.lastName,         
+          lastname: this.infoUser.lastName,
         }),
-        };
-        const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/register",options);
+      };
+      const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/register", options);
       const data = await response.json();
       console.log("data", data)
-      // this.infoUser.$slotsresult = data.success;
-      // if (data.success === true) {
-        //   this.infoUser.token = data.token;
-        // }
-        
-      },
-      
-      handleInput(e) {
-        e.preventDefault();
-        console.log("infoUser", this.infoUser);
-       
-      },
-    },
-  };
+      this.result = data.success;
+      console.log("infoUser", this.infoUser)
 
-  export default List;
+    },
+
+    // Requete pour se connecter
+    GetLogin: async function () {
+
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: this.infoUser.email,
+          password: this.infoUser.password,
+
+        }),
+      };
+      const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/login", options);
+      const data = await response.json();
+      console.log("data", data)
+      this.infoUser.result = data.success;
+      this.infoUser.token = data.token;
+      console.log("infoUser", this.infoUser)
+      if(data.success==true){
+        alert("Connexion réussie")
+        // redirrige vers la page des posts
+        this.$router.push('/thefoodbook');
+      
+      } else
+      alert("Identifiant ou mot de passe erroné")
+
+    },
+    
+    
+    
+  },
+};
+
+
 </script>
 
 <template>
+
   <head> </head>
+
   <body>
     <div class="main">
       <input type="checkbox" id="chk" aria-hidden="true" />
 
       <div class="signup">
         <form @submit.prevent="GetRegister()">
-          <label for="chk" aria-hidden="true">Inscription:</label>
-          <input
-            v-model="this.infoUser.lastName"
-            type="text"
-            name="txt"
-            placeholder="Nom"
-          />
-          <input
-            v-model="this.infoUser.firstName"
-            type="text"
-            name="txt"
-            placeholder="Prenom"
-          />
-          <input
-            v-model="this.infoUser.email"
-            type="email"
-            name="email"
-            placeholder="Email"
-          />
-          <input
-            v-model="this.infoUser.password"
-            type="password"
-            name="pswd"
-            placeholder="Mot De Passe"
-          />
-          <button   type="submit">valider</button>
-          <!-- @click="handleInput" -->
+          <label for="chk" aria-hidden="true">Inscription</label>
+          <input v-model="this.infoUser.lastName" type="text" name="txt" placeholder="Nom" />
+          <input v-model="this.infoUser.firstName" type="text" name="txt" placeholder="Prenom" />
+          <input v-model="this.infoUser.email" type="email" name="email" placeholder="Email" />
+          <input v-model="this.infoUser.password" type="password" name="pswd" placeholder="Mot De Passe" />
+          <button type="submit">Valider</button>
+
         </form>
       </div>
 
       <div class="login">
-        <form>
-          <label for="chk" aria-hidden="true">connexion</label>
-          <input type="email" name="email" placeholder="Email" />
-          <input type="password" name="pswd" placeholder="Mot De Passe" />
-          <button @click="submitco">Connexion</button>
+        <form @submit.prevent="GetLogin()" >
+         
+          <label for="chk" aria-hidden="true">Connexion</label>
+          <input v-model="this.infoUser.email" type="email" name="email" placeholder="Email" />
+          <input v-model="this.infoUser.password" type="password" name="pswd" placeholder="Mot De Passe" />
+          <button>Connexion</button>
+          
+        
         </form>
       </div>
     </div>
+   
   </body>
 </template>
+
+
+
 
 <style scoped>
 body {
@@ -106,6 +122,7 @@ body {
   font-family: "Jost", sans-serif;
   background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
 }
+
 .main {
   width: 350px;
   height: 500px;
@@ -116,14 +133,17 @@ body {
   border-radius: 10px;
   box-shadow: 5px 20px 50px #000;
 }
+
 #chk {
   display: none;
 }
+
 .signup {
   position: relative;
   width: 100%;
   height: 100%;
 }
+
 label {
   color: #2b2a2a;
   font-size: 2.3em;
@@ -134,6 +154,7 @@ label {
   cursor: pointer;
   transition: 0.5s ease-in-out;
 }
+
 input {
   width: 60%;
   height: 20px;
@@ -146,6 +167,7 @@ input {
   outline: none;
   border-radius: 5px;
 }
+
 button {
   width: 60%;
   height: 40px;
@@ -163,9 +185,11 @@ button {
   transition: 0.2s ease-in;
   cursor: pointer;
 }
+
 button:hover {
   background: #989799;
 }
+
 .login {
   height: 460px;
   background: #a52a2a;
@@ -173,18 +197,21 @@ button:hover {
   transform: translateY(-180px);
   transition: 0.8s ease-in-out;
 }
+
 .login label {
   color: #faf6f6;
   transform: scale(0.6);
 }
 
-#chk:checked ~ .login {
+#chk:checked~.login {
   transform: translateY(-500px);
 }
-#chk:checked ~ .login label {
+
+#chk:checked~.login label {
   transform: scale(1);
 }
-#chk:checked ~ .signup label {
+
+#chk:checked~.signup label {
   transform: scale(0.6);
 }
 </style>
