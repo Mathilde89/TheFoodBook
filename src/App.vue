@@ -92,6 +92,7 @@ body{
 
   a{
     text-decoration: none;
+    color: black;
   }
   
   
@@ -160,10 +161,10 @@ body{
   }
   p{
 
-    font-size: large;
+    font-size: x-large;
     font-weight: 700;
     font-style: italic;
-    font-family: 'mardesauve', sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-transform: uppercase;
     text-shadow: -2px 3px 0px white;
   }
