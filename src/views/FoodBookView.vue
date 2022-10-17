@@ -5,6 +5,24 @@ import PostRecette from "../components/PostRecette.vue";
 <script>
 
 export default {
+  data() {
+    return {
+      
+      toto: false,
+      poposte: false,
+      infoCom: {
+        auteur: "",
+        titre: "",
+        recette: "",
+        date: "",
+        heure: "",
+        nblike: "",
+        nbcom: "",
+        id: "",
+      },
+      ListCom: [],
+    };
+  },
 
   methods: {
     // Requete pour lire les posts
@@ -48,7 +66,20 @@ export default {
 
 
 
-    }
+    },
+    NewPost: function () {
+      if (this.poposte == true) {
+        this.poposte = false;
+      } else this.poposte = true;
+    },
+    PostAffiche: function (e) {
+      e.preventDefault();
+      this.toto = true;
+      this.titre = e.target.value;
+      this.recette = e.target.value;
+      
+    
+    },
   },
 };
 // //Fait pour pouvoir tester à enlever après le fetch
