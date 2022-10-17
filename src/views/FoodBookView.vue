@@ -1,5 +1,6 @@
 <script setup>
 import PostRecette from "../components/PostRecette.vue";
+import NavBar2 from "../components/NavBar2.vue";
 </script>
 
 <script>
@@ -142,6 +143,7 @@ const testposterecette3 = {
 </script>
 
 <template>
+
   <button @click="NewPost" type="submit">cree un post</button>
 
   <div v-if="poposte" class="newpost">
@@ -152,7 +154,6 @@ const testposterecette3 = {
     </form>
   </div>
   <PostRecette :titre="this.infoCom.titre" :recette="this.infoCom.recette" v-if="this.toto" />
-
   <!-- ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id", ], -->
   <PostRecette
     :auteur="testposterecette1.auteur1"

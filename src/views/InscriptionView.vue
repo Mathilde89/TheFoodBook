@@ -1,6 +1,13 @@
+<script setup>
+import NavBar from '../components/NavBar.vue';
+</script>
+
 <script>
 
+
+
 export default  {
+
   data() {
     return {
       infoUser: { lastName: "", firstName: "", email: "", password: "", result: null, token: "", },
@@ -62,8 +69,10 @@ export default  {
         // redirrige vers la page des posts
         this.$router.push('/thefoodbook');
       
+
       } else
       alert("Identifiant ou mot de passe erroné")
+
 
     },
     
@@ -79,7 +88,9 @@ export default  {
 
   <head> </head>
 
+
   <body>
+  
     <div class="main">
       <input type="checkbox" id="chk" aria-hidden="true" />
 
@@ -96,6 +107,7 @@ export default  {
       </div>
 
       <div class="login">
+
         <form @submit.prevent="GetLogin()" >
          
           <label for="chk" aria-hidden="true">Connexion</label>
@@ -103,7 +115,7 @@ export default  {
           <input v-model="this.infoUser.password" type="password" name="pswd" placeholder="Mot De Passe" />
           <button>Connexion</button>
           
-        
+
         </form>
       </div>
     </div>
@@ -114,7 +126,8 @@ export default  {
 
 
 
-<style scoped>
+
+<style scoped lang=scss>
 body {
   margin: 0;
   padding: 0;
