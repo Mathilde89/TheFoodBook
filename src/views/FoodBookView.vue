@@ -5,8 +5,39 @@ import PostRecette from "../components/PostRecette.vue";
 <script>
 
 export default {
+data() {
+    return {
+      
+      toto: false,
+      poposte: false,
+      infoCom: {
+        auteur: "",
+        titre: "",
+        recette: "",
+        date: "",
+        heure: "",
+        nblike: "",
+        nbcom: "",
+        id: "",
+      },
+      ListCom: [],
+    };
+  },
 
   methods: {
+  NewPost: function () {
+      if (this.poposte == true) {
+        this.poposte = false;
+      } else this.poposte = true;
+    },
+    PostAffiche: function (e) {
+      e.preventDefault();
+      this.toto = true;
+      this.titre = e.target.value;
+      this.recette = e.target.value;
+      
+    
+    },
     // Requete pour lire les posts
     GetPosts: async function () {
 
@@ -62,10 +93,9 @@ const testposterecette1 = {
   nblike1: 10,
   nbcom1: "30",
   id1: "test1",
-  post1a:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-  post1b:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-  post1c:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-
+  post1a: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  post1b: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  post1c: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
 };
 const testposterecette2 = {
   auteur2: "Titin Milou",
@@ -77,9 +107,9 @@ const testposterecette2 = {
   nblike2: 1,
   nbcom2: "1",
   id2: "test2",
-  post2a:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-  post2b:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-  post2c:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  post2a: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  post2b: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  post2c: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
 };
 const testposterecette3 = {
   auteur3: "Juste Leblanc",
@@ -91,14 +121,27 @@ const testposterecette3 = {
   nblike3: 42,
   nbcom3: "20",
   id3: "test3",
-  post3a:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-  post3b:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-  post3c:"Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  post3a: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  post3b: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+  post3c: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
 };
+
+
 
 </script>
 
 <template>
+  <button @click="NewPost" type="submit">cree un post</button>
+
+  <div v-if="poposte" class="newpost">
+    <form action="">
+      <input  v-model="this.infoCom.titre" type="text" placeholder="titre" />
+      <input v-model="this.infoCom.recette" type="text" placeholder="recette" />
+      <button @click="PostAffiche" type="submit">poste</button>
+    </form>
+  </div>
+  <PostRecette :titre="this.infoCom.titre" :recette="this.infoCom.recette" v-if="this.toto" />
+
   <!-- ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id", ], -->
   <PostRecette
     :auteur="testposterecette1.auteur1"
@@ -121,9 +164,8 @@ const testposterecette3 = {
     :nbcom="testposterecette2.nbcom2"
     :id="testposterecette2.id2"
     :listcompost="testposterecette2.post2a"
-
   />
-<PostRecette
+  <PostRecette
     :auteur="testposterecette3.auteur3"
     :titre="testposterecette3.titre3"
     :recette="testposterecette3.recette3"
@@ -135,11 +177,13 @@ const testposterecette3 = {
     :listcompost="testposterecette3.post3a"
   />
 
+
  <!-- pour test à enlever après -->
   <form @submit.prevent="CreatePost()" action="">
     
     <button type="submit"></button>
   </form>
+
 
 </template>
 
