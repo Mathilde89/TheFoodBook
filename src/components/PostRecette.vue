@@ -16,14 +16,25 @@ const PostRecette = {
     methods: {
         //Fonction pour afficher ou non la div contenant la liste des posts
         clickCom: function () {
-            if (this.bool == true) {
-                this.bool = false;
-            } else
+            let token= JSON.parse(localStorage.getItem("tokenUserLog"));
+            if (token==null){
+                alert("Vous devez vous connectez pour pouvoir commenter")               
+            } else {
+                if (this.bool == true) {
+                    this.bool = false;
+                } else
                 this.bool = true;
+               }
         },
         //Fonction pour augmenter le nombre de like
-        clickLike: function () {          
-            this.addlike++
+        clickLike: function () {  
+            let token= JSON.parse(localStorage.getItem("tokenUserLog"));        
+            
+            if (token==null){
+                alert("Vous devez vous connectez pour pouvoir liker")               
+            } else {
+                this.addlike++
+               }
                 
         }
     },

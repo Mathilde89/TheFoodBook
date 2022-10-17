@@ -55,6 +55,9 @@ export default  {
       this.infoUser.token = data.token;
       console.log("infoUser", this.infoUser)
       if(data.success==true){
+
+        // Mise dans le local storage
+        localStorage.setItem("tokenUserLog",JSON.stringify(this.infoUser.token));
         alert("Connexion réussie")
         // redirrige vers la page des posts
         this.$router.push('/thefoodbook');

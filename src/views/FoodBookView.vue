@@ -3,7 +3,55 @@ import PostRecette from "../components/PostRecette.vue";
 </script>
 
 <script>
-//Fait pour pouvoir tester à enlever après le fetch
+
+export default {
+
+  methods: {
+    // Requete pour lire les posts
+    GetPosts: async function () {
+
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+      };
+      const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/posts?page=0&limit=10", options);
+      const data = await response.json();
+      console.log("data", data)
+    },
+
+     // Requete pour créer un post
+    CreatePost: async function () {
+
+      //Reccupère le token qui est dans le local storage
+      let token= JSON.parse(localStorage.getItem("tokenUserLog"));
+      console.log("token", token)
+
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${token}`
+        },
+        body: JSON.stringify({
+          title: "tittletest",
+          content: "contenttest"
+        }),
+
+
+      };
+      const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/post", options);
+      const data = await response.json();
+      console.log("data", data)
+
+
+
+    }
+  },
+};
+// //Fait pour pouvoir tester à enlever après le fetch
 const testposterecette1 = {
   auteur1: "Jane Doe",
   titre1: "Couscous marocain",
@@ -47,46 +95,6 @@ const testposterecette3 = {
   post3c: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
 };
 
-export default {
-  data() {
-    return {
-      
-      toto: false,
-      poposte: false,
-      infoCom: {
-        auteur: "",
-        titre: "",
-        recette: "",
-        date: "",
-        heure: "",
-        nblike: "",
-        nbcom: "",
-        id: "",
-      },
-      ListCom: [],
-    };
-  },
-  methods: {
-    NewPost: function () {
-      if (this.poposte == true) {
-        this.poposte = false;
-      } else this.poposte = true;
-    },
-    PostAffiche: function (e) {
-      e.preventDefault();
-      this.toto = true;
-      this.titre = e.target.value;
-      this.recette = e.target.value;
-      
-    
-    },
-  },
-
-  //   testposterecette1,
-  //   testposterecette2,
-  //   testposterecette3,
-  // };
-};
 </script>
 
 <template>
@@ -134,5 +142,12 @@ export default {
     :nbcom="testposterecette3.nbcom3"
     :id="testposterecette3.id3"
     :listcompost="testposterecette3.post3a"
-  />
+  /> 
 </template>
+
+<style scoped>
+button {
+  width: 200px;
+  height: 200px;
+}
+</style>
