@@ -5,11 +5,7 @@ import PostRecette from "../components/PostRecette.vue";
 <script>
 
 export default {
-<<<<<<< HEAD
   data() {
-=======
-data() {
->>>>>>> origin/requete-posts
     return {
       
       toto: false,
@@ -190,7 +186,7 @@ const testposterecette3 = {
     :nbcom="testposterecette3.nbcom3"
     :id="testposterecette3.id3"
     :listcompost="testposterecette3.post3a"
-<<<<<<< HEAD
+
   /> 
 </template>
 
