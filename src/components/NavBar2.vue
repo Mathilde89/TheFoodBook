@@ -1,18 +1,18 @@
 <template>
-   <header>
-    <div class="navBar">
-      <nav class="navCss">
-        <img class="logoNav" src="../img/logo.png">
-        <RouterLink class="routerLink" to="/">Home</RouterLink>
-        <a href="#cardContainer">Posts</a>
-        <RouterLink v-if="isUserConnected" class="routerLink" to="/ProfileEdit">Mon Profil</RouterLink>
-        <RouterLink v-if="isUserConnected" class="routerLink" to="/logOut">Se déconnecter</RouterLink>
-        <RouterLink v-else class="routerLink" to="/inscription">join/log</RouterLink> 
-      </nav>
-    </div>
-  </header>
+    <header>
+        <div class="navBar">
+        <nav class="navCss">
+                <img class="logoNav" src="../src/img/logo.png">
+                <RouterLink class="routerLink" to="/">Home</RouterLink>
+                <a href="#cardContainer">Posts</a>
+                <RouterLink  class="routerLink" to="/ProfileEdit">Mon Profil</RouterLink>
+                <RouterLink  class="routerLink" to="/logOut">Se déconnecter</RouterLink>
+            </nav>
+        </div>
+    </header>
 </template>
 
+  
 <style lang="scss" scoped>
     @font-face {
       font-family: "mardesauve";
@@ -96,18 +96,3 @@
     }
 
 </style>
-
-<script>
-  export default {
-    data() {
-      return {
-        isUserConnected: !!localStorage.getItem("tokenUserLog"),
-      }
-    },
-    mounted: function(){
-      this.$router.afterEach(() => {
-        this.isUserConnected = !!localStorage.getItem("tokenUserLog");
-      });
-    }
-  }
-</script>
