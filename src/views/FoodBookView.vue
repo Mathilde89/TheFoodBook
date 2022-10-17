@@ -146,7 +146,7 @@ export default {
 </script>
 
 <template>
-  <button @click="NewPost" type="submit">cree un post</button>
+  <button @click="newPost" type="submit">cree un post</button>
 
   <div @submit.prevent="createPost()" v-if="ifcreateposte" class="newpost">
     <form action="">
