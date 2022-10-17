@@ -5,7 +5,11 @@ import PostRecette from "../components/PostRecette.vue";
 <script>
 
 export default {
+<<<<<<< HEAD
   data() {
+=======
+data() {
+>>>>>>> origin/requete-posts
     return {
       
       toto: false,
@@ -25,6 +29,19 @@ export default {
   },
 
   methods: {
+  NewPost: function () {
+      if (this.poposte == true) {
+        this.poposte = false;
+      } else this.poposte = true;
+    },
+    PostAffiche: function (e) {
+      e.preventDefault();
+      this.toto = true;
+      this.titre = e.target.value;
+      this.recette = e.target.value;
+      
+    
+    },
     // Requete pour lire les posts
     GetPosts: async function () {
 
@@ -173,7 +190,20 @@ const testposterecette3 = {
     :nbcom="testposterecette3.nbcom3"
     :id="testposterecette3.id3"
     :listcompost="testposterecette3.post3a"
+<<<<<<< HEAD
   /> 
+=======
+  />
+
+
+ <!-- pour test à enlever après -->
+  <form @submit.prevent="CreatePost()" action="">
+    
+    <button type="submit"></button>
+  </form>
+
+
+>>>>>>> origin/requete-posts
 </template>
 
 <style scoped>
