@@ -1,5 +1,10 @@
+<script setup>
+import NavBar from '../components/NavBar.vue';
+</script>
+
 <script>
-const List = {
+
+export default {
   data() {
     return {
       infoUser: { lastName: "", firstName: "", email: "", password: "",result: null, token: "",},
@@ -34,20 +39,18 @@ const List = {
         
       },
       
-      handleInput(e) {
-        e.preventDefault();
-        console.log("infoUser", this.infoUser);
-       
-      },
+     
     },
   };
 
-  export default List;
+  
 </script>
 
 <template>
-  <head> </head>
+  
+  <head></head>
   <body>
+  
     <div class="main">
       <input type="checkbox" id="chk" aria-hidden="true" />
 
@@ -88,14 +91,14 @@ const List = {
           <label for="chk" aria-hidden="true">connexion</label>
           <input type="email" name="email" placeholder="Email" />
           <input type="password" name="pswd" placeholder="Mot De Passe" />
-          <button @click="submitco">Connexion</button>
+          <button >Connexion</button>
         </form>
       </div>
     </div>
   </body>
 </template>
 
-<style scoped>
+<style lang="scss">
 body {
   margin: 0;
   padding: 0;

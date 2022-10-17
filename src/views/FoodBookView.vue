@@ -1,5 +1,6 @@
 <script setup>
 import PostRecette from "../components/PostRecette.vue";
+import NavBar2 from "../components/NavBar2.vue";
 </script>
 
 <script>
@@ -60,6 +61,7 @@ export default {
 </script>
 
 <template>
+  
   <!-- ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id", ], -->
   <PostRecette
     :auteur="testposterecette1.auteur1"

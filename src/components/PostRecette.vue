@@ -128,7 +128,11 @@ $taillewidhtpost: 500px;
     width: 100%;
     font-size: larger;
 }
-
+.cardContainer{
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+}
 .recette {
     height: 70%;
     width: 100%;
