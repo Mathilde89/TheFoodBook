@@ -192,18 +192,6 @@ const testposterecette3 = {
     :listcompost="testposterecette3.post3a"
 <<<<<<< HEAD
   /> 
-=======
-  />
-
-
- <!-- pour test à enlever après -->
-  <form @submit.prevent="CreatePost()" action="">
-    
-    <button type="submit"></button>
-  </form>
-
-
->>>>>>> origin/requete-posts
 </template>
 
 <style scoped>
