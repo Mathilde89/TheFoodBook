@@ -192,7 +192,7 @@ export default {
     :id="testposterecette3.id3"
     :listcompost="testposterecette3.post3a"
 
-  <!-- ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id", ],
+  ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id", ],
   <PostRecette :auteur="testposterecette1.auteur1" :titre="testposterecette1.titre1"
     :recette="testposterecette1.recette1" :date="testposterecette1.date1" :heure="testposterecette1.heure1"
     :nblike="testposterecette1.nblike1" :nbcom="testposterecette1.nbcom1" :id="testposterecette1.id1"
