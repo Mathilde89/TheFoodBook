@@ -1,6 +1,6 @@
 <script>
 
-export default  {
+export default {
   data() {
     return {
       infoUser: { lastName: "", firstName: "", email: "", password: "", result: null, token: "", },
@@ -54,21 +54,21 @@ export default  {
       this.infoUser.result = data.success;
       this.infoUser.token = data.token;
       console.log("infoUser", this.infoUser)
-      if(data.success==true){
+      if (data.success == true) {
 
         // Mise dans le local storage
-        localStorage.setItem("tokenUserLog",JSON.stringify(this.infoUser.token));
+        localStorage.setItem("tokenUserLog", JSON.stringify(this.infoUser.token));
         alert("Connexion réussie")
         // redirrige vers la page des posts
         this.$router.push('/thefoodbook');
-      
+
       } else
-      alert("Identifiant ou mot de passe erroné")
+        alert("Identifiant ou mot de passe erroné")
 
     },
-    
-    
-    
+
+
+
   },
 };
 
@@ -96,18 +96,18 @@ export default  {
       </div>
 
       <div class="login">
-        <form @submit.prevent="GetLogin()" >
-         
+        <form @submit.prevent="GetLogin()">
+
           <label for="chk" aria-hidden="true">Connexion</label>
           <input v-model="this.infoUser.email" type="email" name="email" placeholder="Email" />
           <input v-model="this.infoUser.password" type="password" name="pswd" placeholder="Mot De Passe" />
           <button>Connexion</button>
-          
-        
+
+
         </form>
       </div>
     </div>
-   
+
   </body>
 </template>
 
