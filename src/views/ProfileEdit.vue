@@ -8,24 +8,27 @@ export default{
             age: "",
             message: "",
             userProfilList: [],
-        }
+        };
     },
     methods: {
-        modifyProfile: function () {
-            let token = (localStorage.getItem("tokenUserLog"));
+        modifyProfile: async function () {
+            let token = JSON.parse(localStorage.getItem("tokenUserLog"));
+            console.log(token);
+            
             const options = {
-                method: "get",
+                method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `bearer ${token}`,
                 },
-            }
-        }
-    }
-}
-const response = await fetch('https://social-network-api.osc-fr1.scalingo.io/foodbook/user, options')
-const data = await response.json()
-console.log('data:', data)
+            };
+            const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/user", options);
+            const data = await response.json();
+            console.log('data:', data)
+        },
+    }, 
+};
+
 
 
 </script>
@@ -36,8 +39,10 @@ console.log('data:', data)
     <div class="formProfil">
         <h1>Votre Profil</h1>
 
-
-        <button>Modifier son Profil</button>
+        <form @submit.prevent="modifyProfile()">
+            <button type="submit" >Modifier son Profil</button>
+        </form>
+        
         <form action="" class="form">
             <label for="nom">Entrez votre nom: <input type="text" placeholder="nom" v-model="this.lastName"></label>
             <label for="prénom">Entrez votre prénom: <input type="text" placeholder="prénom" v-model="this.firstName"></label>
