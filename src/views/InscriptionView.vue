@@ -1,7 +1,3 @@
-<script setup>
-import NavBar from '../components/NavBar.vue';
-</script>
-
 <script>
 
 
@@ -85,7 +81,6 @@ export default  {
 
 <template>
 
-  <head> </head>
 
 
   <body>

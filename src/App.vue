@@ -33,7 +33,7 @@ export default {
   </div>
 
   
-  <RouterView />
+  <!-- <RouterView /> -->
   <div class="cardContainer" id="cardContainer">
     <PostRecette/>
   </div>

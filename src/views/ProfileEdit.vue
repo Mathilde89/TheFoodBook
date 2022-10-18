@@ -57,13 +57,14 @@ export default{
 <template>
     <div class="formProfil">
         <h1>Votre Profil</h1>
-
-        <form @submit.prevent="modifyProfile()">
-            <button type="submit" >Modifier son Profil</button>
+        <form type="submit" @submit.prevent="modifyProfile()" @click="modifyProfile()">
+            <button >afficher son Profil</button>
         </form>
+
         
-        <form action="" class="form" @submit.prevent="modifyInfoProfile()">
-            <label for="nom">Entrez votre nom: <input type="text" placeholder="nom" v-model="this.userProfilList.lastName"></label>
+        <form class="form" @submit.prevent="modifyInfoProfile()" v-for="elements in userProfilList">
+            
+            <label for="nom">''''Entrez votre nom:''''<input type="text" :placeholder="this.userProfilList.lastName" v-model="this.userProfilList.lastName" ></label>
             <label for="prénom">Entrez votre prénom: <input type="text" placeholder="prénom" v-model="this.userProfilList.firstName"></label>
             <label for="mail">Entrez votre mail: <input type="text" placeholder="mail" v-model="this.userProfilList.email"></label>
             <label for="pseudo">Entrez votre age: <input type="text" placeholder="age" v-model="this.userProfilList.age"></label>
@@ -75,6 +76,8 @@ export default{
 <style lang="scss" scoped>
 
 .formProfil{
+    display: flex;
+    flex-direction: column;
     text-align: center;
     background-color: lightgray;
     .form{
