@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       listPost: [],
+      liketest:2,
       ifcreateposte: false,
       posteOK: false,
       infoPost: {
@@ -26,6 +27,9 @@ export default {
   },
 
   methods: {
+    testemit: function () {
+      console.log("emitréussi")
+    },
     newPost: function () {
       if (this.ifcreateposte == true) {
         this.ifcreateposte = false;
@@ -53,21 +57,13 @@ export default {
       const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/posts?page=0&limit=10", options);
       const data = await response.json();
 
-      // this.infoPost.titre=posts.title
+
       this.listPost = data.posts
-      console.log("data", data)
-      console.log("response", response)
-    
-
+      
+      console.log(this.listPost)
+      console.log(this.liketest)
       
 
-
-
-
-
-
-
-      
     },
 
     // Requete pour créer un post
@@ -80,7 +76,7 @@ export default {
         titre: this.infoPost.titre,
         recette: this.infoPost.recette,
       }
-     
+
 
       const options = {
         method: "POST",
@@ -98,11 +94,9 @@ export default {
       };
       const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/post", options);
       const data = await response.json();
-      console.log("datacreate", data)
-      
+
       if (data.success) {
         await this.getPosts();
-        // await this.likePosts();
 
       } else {
         alert("Veuillez vous inscrire")
@@ -113,14 +107,8 @@ export default {
       console.log("increate", this.listPost)
 
 
-      // for (var i = 0; i < this.listPost; i++) {
-        // faire la boucle
-         await this.likePosts("634e81adccaf7f001d910027")
-        
-
-      
-      
-      
+      // this.listPost.forEach(element => console.log(element));
+      // this.listPost.forEach(element => this.likePosts(element._id));
 
       this.posteOK = true;
       if (this.posteOK == true) {
@@ -136,7 +124,7 @@ export default {
       //Reccupère le token qui est dans le local storage
       let token = JSON.parse(localStorage.getItem("tokenUserLog"));
 
-         
+
       const options = {
         method: "POST",
         headers: {
@@ -150,71 +138,36 @@ export default {
       };
       const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/post/like", options);
       const data = await response.json();
-      console.log("likepost")
-      
+      console.log(data)
+    
+
 
 
     },
 
   },
+  computed: {
+    numberLikeShow: async function () {
+      // await this.getPosts();
+      // return  this.listPost.likes
 
-  // mounted: {
-  //   function () { this.getPosts() }
+
+    },
+  },
+    mounted:
+      function () { this.getPosts() }
 
 
-  // }
 };
-// // //Fait pour pouvoir tester à enlever après le fetch
-// const testposterecette1 = {
-//   auteur1: "Jane Doe",
-//   titre1: "Couscous marocain",
-//   recette1:
-//     "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore cumque quaerat ea laborum quod minima. Quisquam dolores sapiente, facilis deserunt minima sed recusandae itaque ducimus alias quos odit culpa debitis.",
-//   date1: "13/10/2022",
-//   heure1: "15:40",
-//   nblike1: 10,
-//   nbcom1: "30",
-//   id1: "test1",
-//   post1a: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-//   post1b: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-//   post1c: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-// };
-// const testposterecette2 = {
-//   auteur2: "Titin Milou",
-//   titre2: "Pizza",
-//   recette2:
-//     "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore cumque quaerat ea laborum quod minima. Quisquam dolores sapiente, facilis deserunt minima sed recusandae itaque ducimus alias quos odit culpa debitis.",
-//   date2: "04/10/2022",
-//   heure2: "09:23",
-//   nblike2: 1,
-//   nbcom2: "1",
-//   id2: "test2",
-//   post2a: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-//   post2b: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-//   post2c: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-// };
-// const testposterecette3 = {
-//   auteur3: "Juste Leblanc",
-//   titre3: "Quiche",
-//   recette3:
-//     "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore cumque quaerat ea laborum quod minima. Quisquam dolores sapiente, facilis deserunt minima sed recusandae itaque ducimus alias quos odit culpa debitis.",
-//   date3: "28/01/2013",
-//   heure3: "09:33",
-//   nblike3: 42,
-//   nbcom3: "20",
-//   id3: "test3",
-//   post3a: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-//   post3b: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-//   post3c: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
-// };
+
 
 </script>
 
 <template>
   <button @click="newPost" type="submit">Créer un post</button>
-  <form @submit.prevent="likePosts()" action="">
+  <form  action="">
 
-    <button type="submit">Tests</button>
+    <button   type="submit">Tests</button>
   </form>
 
   <div @submit.prevent="createPost()" v-if="ifcreateposte" class="newpost">
@@ -224,7 +177,9 @@ export default {
       <button type="submit">Envoyer</button>
     </form>
   </div>
-  <PostRecette v-for="item in this.listPost" :titre="item.title" :recette="item.content"  />
+  <PostRecette @some-event="likePosts(item._id)" v-for="item in this.listPost" :titre="item.title"
+    :recette="item.content" :nblike="item.likes.length" :key="item._id" />
+    
 
   <!-- ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id", ], -->
   <!-- <PostRecette.
