@@ -1,13 +1,18 @@
-<script>
+<script setup>
+import FoodBook from "../views/FoodBookView.vue";
 
-const PostRecette = {
+</script>
+
+
+<script>
+export default {
     data() {
         return {
             // bool est utilisé pour afficher la liste des posts quand clique sur le bouton
             bool: false,
-            addlike:this.nblike,
-            
-          };
+            addlike: 0,
+
+        };
     },
 
     //Ici ce sont les données liés à un post
@@ -16,30 +21,32 @@ const PostRecette = {
     methods: {
         //Fonction pour afficher ou non la div contenant la liste des posts
         clickCom: function () {
-            let token= JSON.parse(localStorage.getItem("tokenUserLog"));
-            if (token==null){
-                alert("Vous devez vous connectez pour pouvoir commenter")               
+            let token = JSON.parse(localStorage.getItem("tokenUserLog"));
+            if (token == null) {
+                alert("Vous devez vous connectez pour pouvoir commenter")
             } else {
                 if (this.bool == true) {
                     this.bool = false;
                 } else
-                this.bool = true;
-               }
+                    this.bool = true;
+            }
         },
         //Fonction pour augmenter le nombre de like
-        clickLike: function () {  
-            let token= JSON.parse(localStorage.getItem("tokenUserLog"));        
-            
-            if (token==null){
-                alert("Vous devez vous connectez pour pouvoir liker")               
-            } else {
-                this.addlike++
-               }
-                
-        }
+        // clickLike: function () {
+        //     let token = JSON.parse(localStorage.getItem("tokenUserLog"));
+
+        //     if (token == null) {
+        //         alert("Vous devez vous connectez pour pouvoir liker")
+        //     } else {
+        //         this.addlike++
+        //     }
+
+        // },
+       
+
     },
 }
-export default PostRecette;
+
 
 </script>
 
@@ -58,11 +65,11 @@ export default PostRecette;
         </div>
         <div class="footerpost">
             <div class="like">
-                <button @click="clickLike">
+                <button @click="likePosts">
                     <i class="fa-solid fa-heart"></i>
                 </button>
                 <div class="nblike">
-                    {{addlike}} <i class="fa-solid fa-heart"></i>
+                    {{nblike}} <i class="fa-solid fa-heart"></i>
                 </div>
             </div>
             <div class="com">
@@ -82,25 +89,25 @@ export default PostRecette;
     <div v-if="bool" class="listcomcontainer">
         <form action="">
             <input type="text" placeholder="A vos commentaires!">
-            <button  class="buttoncomvalid">
+            <button class="buttoncomvalid">
                 <i class="fa-solid fa-share"></i>
-                </button>
+            </button>
         </form>
         <div class="listcom">
 
-           <div class="auteurdate">
-            
-               <h1>{{auteur}}</h1> a écrit le {{date}} à {{heure}} :
+            <div class="auteurdate">
 
-           </div>
-           <p>
-               {{listcompost}}
-           </p> 
-            
+                <h1>{{auteur}}</h1> a écrit le {{date}} à {{heure}} :
+
+            </div>
+            <p>
+                {{listcompost}}
+            </p>
+
         </div>
-     
-       
-        
+
+
+
 
 
     </div>
@@ -139,11 +146,13 @@ $taillewidhtpost: 500px;
     width: 100%;
     font-size: larger;
 }
-.cardContainer{
-  display: flex;
-  flex-direction: row;
-  margin-top: 30px;
+
+.cardContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
 }
+
 .recette {
     height: 70%;
     width: 100%;
@@ -180,7 +189,7 @@ $taillewidhtpost: 500px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    
+
 
 
 }
@@ -236,40 +245,44 @@ button {
     margin-bottom: 20px;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
-.listcom{
+
+.listcom {
     display: flex;
     flex-direction: column;
     border: 1px solid $colorPrimary;
     padding: 5px;
     border-radius: 10px;
-    h1{
+
+    h1 {
         font-size: 15px;
         margin-right: 10px;
     }
 
 }
-.auteurdate{
+
+.auteurdate {
     display: flex;
     flex-direction: row;
     align-items: center;
     font-size: 12px;
-    
+
 }
 
-input{
+input {
     width: 85%;
     height: 40px;
     border: 1px solid $colorGreyDark;
     border-radius: 10px;
     outline: none;
     padding: 5px;
-    
+
 }
-form{
+
+form {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    
+
 }
 </style>
