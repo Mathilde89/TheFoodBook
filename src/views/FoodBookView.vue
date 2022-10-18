@@ -52,15 +52,23 @@ export default {
       };
       const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/posts?page=0&limit=10", options);
       const data = await response.json();
-      console.log("data", data)
+    
+      // this.infoPost.titre=posts.title
+      this.listPost=data.posts
+      console.log("listPOst", this.listPost)
     },
 
     // Requete pour créer un post
     createPost: async function () {
-
+    
       //Reccupère le token qui est dans le local storage
       let token = JSON.parse(localStorage.getItem("tokenUserLog"));
-      console.log("token", token)
+     
+      const infoPost= {
+        titre: this.infoPost.titre,
+        recette: this.infoPost.recette,
+      }
+      console.log("infopost", infoPost)
 
       const options = {
         method: "POST",
@@ -69,35 +77,42 @@ export default {
           "Authorization": `bearer ${token}`
         },
         body: JSON.stringify({
-          title: this.infoPost.titre,
-          content: this.infoPost.recette
+          title: infoPost.titre,
+          content: infoPost.recette
         }),
+       
 
 
       };
       const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/post", options);
       const data = await response.json();
+      console.log("data", data)
+      if (data.success) {
+          await this.getPosts();
+          
+        } else {
+          alert("Veuillez vous inscrire")
+        }
+
+      
+      this.listPost.push(infoPost)
+      console.log("listPost", this.listPost)
 
       this.posteOK = true;
       if (this.posteOK == true) {
-        this.ifcreateposte = false;
+        this.posteOK = false;
       } else this.posteOK= true;
-      console.log("data", data)
-      this.listPost.push(this.infoPost)
-      console.log("infopost", this.infoPost)
-      console.log("listpost", this.listPost)
-      
-
-
-
+     
+    
     },
     
   },
 
-  mouted: {
-    function () { this.getPosts()}
+  // mounted: {
+  //   function () { this.getPosts() }
 
-  }
+
+  // }
 };
 // // //Fait pour pouvoir tester à enlever après le fetch
 // const testposterecette1 = {
@@ -146,22 +161,23 @@ export default {
 </script>
 
 <template>
-  <div class="nvPost">
-    <button @click="newPost" type="submit">creer un post</button>
+  <button @click="newPost" type="submit">Créer un post</button>
+  <form @submit.prevent="getPosts()" action="">
 
-    <div @submit.prevent="createPost()" v-if="ifcreateposte" class="newpost">
-      <form action="" class="nvPost">
-        <input v-model="this.infoPost.titre" type="text" placeholder="titre" />
-        <input v-model="this.infoPost.recette" type="text" placeholder="recette" />
-        <button  type="submit">Envoyer</button>
-        <!-- @click="PostAffiche" -->
-      </form>
-    </div>
+    <button  type="submit">Tests</button>
+  </form>
+
+  <div @submit.prevent="createPost()" v-if="ifcreateposte" class="newpost">
+    <form action="">
+      <input v-model="this.infoPost.titre" type="text" placeholder="titre" />
+      <input v-model="this.infoPost.recette" type="text" placeholder="recette" />
+      <button  type="submit">Envoyer</button>
+    </form>
   </div>
-  <PostRecette :titre="this.infoCom.titre" :recette="this.infoCom.recette" v-if="this.toto" />
+  <PostRecette v-for="item in this.listPost" :titre="item.title" :recette="item.content" />
 
   <!-- ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id", ], -->
-  <!-- <PostRecette
+  <!-- <PostRecette.
     :auteur="testposterecette1.auteur1"
     :titre="testposterecette1.titre1"
     :recette="testposterecette1.recette1"
