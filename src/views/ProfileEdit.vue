@@ -2,12 +2,7 @@
 export default{
     data(){
         return{
-            lastName: "",
-            firstName: "",
-            email: "",
-            age: "",
-            message: "",
-            userProfilList: [],
+            userProfilList: {lastName: "", firstName: "", email: "", age: "", token:"",} 
         };
     },
     methods: {
@@ -26,6 +21,30 @@ export default{
             const data = await response.json();
             console.log('data:', data)
         },
+        modifyInfoProfile: async function () {
+            let token = JSON.parse(localStorage.getItem("tokenUserLog"));
+            console.log(token);
+            
+            const options = {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `bearer ${token}`,
+                },
+                Body:  JSON.stringify({
+                    firstName: this.userProfilList.firstName,
+                    lastName: this.userProfilList.lastName,
+                    email: this.userProfilList.email,
+                    age: this.userProfilList.age
+                })
+            };
+            const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/user", options);
+            const data = await response.json();
+            console.log('data:', data)
+            this.result = data.success;
+            console.log("userProfilList" , this.userProfilList);
+
+        },
     }, 
 };
 
@@ -43,12 +62,12 @@ export default{
             <button type="submit" >Modifier son Profil</button>
         </form>
         
-        <form action="" class="form">
-            <label for="nom">Entrez votre nom: <input type="text" placeholder="nom" v-model="this.lastName"></label>
-            <label for="prénom">Entrez votre prénom: <input type="text" placeholder="prénom" v-model="this.firstName"></label>
-            <label for="mail">Entrez votre mail: <input type="text" placeholder="mail" v-model="this.email"></label>
-            <label for="pseudo">Entrez votre age: <input type="text" placeholder="age" v-model="this.age"></label>
-            <input type="submit" value="valider">
+        <form action="" class="form" @submit.prevent="modifyInfoProfile()">
+            <label for="nom">Entrez votre nom: <input type="text" placeholder="nom" v-model="this.userProfilList.lastName"></label>
+            <label for="prénom">Entrez votre prénom: <input type="text" placeholder="prénom" v-model="this.userProfilList.firstName"></label>
+            <label for="mail">Entrez votre mail: <input type="text" placeholder="mail" v-model="this.userProfilList.email"></label>
+            <label for="pseudo">Entrez votre age: <input type="text" placeholder="age" v-model="this.userProfilList.age"></label>
+            <input type="submit"  value="valider">
         </form>
     </div>
 </template>
