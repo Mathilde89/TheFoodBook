@@ -1,6 +1,6 @@
 <script setup>
 import PostRecette from "../components/PostRecette.vue";
-import NavBar2 from "../components/NavBar2.vue";
+
 </script>
 
 <script>
@@ -146,15 +146,17 @@ export default {
 </script>
 
 <template>
-  <button @click="newPost" type="submit">cree un post</button>
+  <div class="nvPost">
+    <button @click="newPost" type="submit">creer un post</button>
 
-  <div @submit.prevent="createPost()" v-if="ifcreateposte" class="newpost">
-    <form action="">
-      <input v-model="this.infoPost.titre" type="text" placeholder="titre" />
-      <input v-model="this.infoPost.recette" type="text" placeholder="recette" />
-      <button  type="submit">Envoyer</button>
-      <!-- @click="PostAffiche" -->
-    </form>
+    <div @submit.prevent="createPost()" v-if="ifcreateposte" class="newpost">
+      <form action="" class="nvPost">
+        <input v-model="this.infoPost.titre" type="text" placeholder="titre" />
+        <input v-model="this.infoPost.recette" type="text" placeholder="recette" />
+        <button  type="submit">Envoyer</button>
+        <!-- @click="PostAffiche" -->
+      </form>
+    </div>
   </div>
   <PostRecette :titre="this.infoCom.titre" :recette="this.infoCom.recette" v-if="this.toto" />
 
@@ -209,7 +211,16 @@ export default {
 
 <style scoped>
 button {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: rgb(7, 69, 2);
+  color: white;
+  font-size: 0,6em;
+}
+.nvPost{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>

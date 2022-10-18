@@ -11,6 +11,12 @@
       </nav>
     </div>
   </header>
+  <RouterView />
+  <div class="cardContainer" id="cardContainer">
+    <FoodBookView/>
+  </div>
+   
+
 </template>
 
 <style lang="scss" scoped>
