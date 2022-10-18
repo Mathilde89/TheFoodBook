@@ -4,6 +4,7 @@ import FooterContent from './components/FooterContent.vue'
 import FoodBookView from "./views/FoodBookView.vue";
 import NavBar from "./components/NavBar.vue";
 import HomeContent from "./components/HomeContent.vue";
+import PostRecette from "./components/PostRecette.vue";
 
 </script>
 
@@ -25,14 +26,16 @@ export default {
   <header>
     <NavBar/>
   </header> 
+
  
   <div>
     <HomeContent/>
   </div>
+
   
   <RouterView />
   <div class="cardContainer" id="cardContainer">
-    <FoodBookView/>
+    <PostRecette/>
   </div>
    
 
