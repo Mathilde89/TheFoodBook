@@ -62,11 +62,11 @@ export default{
         </form>
 
         
-        <form class="form" @submit.prevent="modifyInfoProfile()" v-for="elements in userProfilList">
+        <form class="form" @submit.prevent="modifyInfoProfile()" >
             
-            <label for="nom">''''Entrez votre nom:''''<input type="text" :placeholder="this.userProfilList.lastName" v-model="this.userProfilList.lastName" ></label>
-            <label for="prénom">Entrez votre prénom: <input type="text" placeholder="prénom" v-model="this.userProfilList.firstName"></label>
-            <label for="mail">Entrez votre mail: <input type="text" placeholder="mail" v-model="this.userProfilList.email"></label>
+            <label for="nom">Entrez votre nom:<input type="text" :placeholder=" `${this.userProfilList.valueOf(this.lastName)}`"  v-model="this.userProfilList.lastName"></label>
+            <label for="prénom">Entrez votre prénom: <input type="text" :placeholder=" `${this.userProfilList.firstName}`"  v-model="this.userProfilList.firstName"></label>
+            <label for="mail">Entrez votre mail: <input type="text" :placeholder="`${this.userProfilList.firstName}`" v-model="this.userProfilList.email"></label>
             <label for="pseudo">Entrez votre age: <input type="text" placeholder="age" v-model="this.userProfilList.age"></label>
             <input type="submit"  value="valider">
         </form>
