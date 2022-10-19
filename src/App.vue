@@ -35,7 +35,7 @@ export default {
   
   <!-- <RouterView /> -->
   <div class="cardContainer" id="cardContainer">
-    <PostRecette/>
+    <FoodBookView/>
   </div>
    
 
@@ -79,6 +79,7 @@ body{
   display: flex;
   flex-direction: row;
   margin-top: 30px;
+  flex-wrap: wrap;
 }
 
 </style>

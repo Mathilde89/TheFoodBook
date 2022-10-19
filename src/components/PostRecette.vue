@@ -14,7 +14,7 @@ export default {
          
         };
     },
-
+    emits: ["someEvent"],
     //Ici ce sont les données liés à un post
     props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "click", "listcompost", "key"],
 
