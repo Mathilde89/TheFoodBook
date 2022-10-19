@@ -14,8 +14,11 @@ export default {
 
         };
     },
-    emits: ["someEvent"],
-
+    emits:
+    ["eventCom",
+    "someEvent"
+],
+    
     //Ici ce sont les données liés à un post
     props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "click", "listcompost", "key"],
 
@@ -37,7 +40,7 @@ export default {
 
 
 
-    },
+    
 }
 </script>
 
@@ -68,7 +71,7 @@ export default {
                 </div>
             </div>
             <div class="com">
-                <button @click="clickCom" class="buttoncom">
+                <button @click.prevent="$emit('eventCom')" class="buttoncom">
                     <i class="fa-solid fa-comments"></i>
                 </button>
                 <div class="nbcom">
