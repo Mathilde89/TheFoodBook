@@ -1,3 +1,9 @@
+<!-- style CSS -->
+<!-- Affichage de plusieurs posts sur la page avec menu page1 sur 10-->
+<!-- Affichage  des infos du profil sur les likes et commentaires-->
+
+
+
 <script setup>
 import PostRecette from "../components/PostRecette.vue";
 
@@ -181,53 +187,7 @@ export default {
     :recette="item.content" :nblike="item.likes.length" :key="item._id" />
     
 
-  <!-- ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id", ], -->
-  <!-- <PostRecette.
-    :auteur="testposterecette1.auteur1"
-    :titre="testposterecette1.titre1"
-    :recette="testposterecette1.recette1"
-    :date="testposterecette1.date1"
-    :heure="testposterecette1.heure1"
-    :nblike="testposterecette1.nblike1"
-    :nbcom="testposterecette1.nbcom1"
-    :id="testposterecette1.id1"
-    :listcompost="testposterecette1.post1a"
-  />
-  <PostRecette
-    :auteur="testposterecette2.auteur2"
-    :titre="testposterecette2.titre2"
-    :recette="testposterecette2.recette2"
-    :date="testposterecette2.date2"
-    :heure="testposterecette2.heure2"
-    :nblike="testposterecette2.nblike2"
-    :nbcom="testposterecette2.nbcom2"
-    :id="testposterecette2.id2"
-    :listcompost="testposterecette2.post2a"
-  />
-  <PostRecette
-    :auteur="testposterecette3.auteur3"
-    :titre="testposterecette3.titre3"
-    :recette="testposterecette3.recette3"
-    :date="testposterecette3.date3"
-    :heure="testposterecette3.heure3"
-    :nblike="testposterecette3.nblike3"
-    :nbcom="testposterecette3.nbcom3"
-    :id="testposterecette3.id3"
-    :listcompost="testposterecette3.post3a"
-
-  ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id", ],
-  <PostRecette :auteur="testposterecette1.auteur1" :titre="testposterecette1.titre1"
-    :recette="testposterecette1.recette1" :date="testposterecette1.date1" :heure="testposterecette1.heure1"
-    :nblike="testposterecette1.nblike1" :nbcom="testposterecette1.nbcom1" :id="testposterecette1.id1"
-    :listcompost="testposterecette1.post1a" />
-  <PostRecette :auteur="testposterecette2.auteur2" :titre="testposterecette2.titre2"
-    :recette="testposterecette2.recette2" :date="testposterecette2.date2" :heure="testposterecette2.heure2"
-    :nblike="testposterecette2.nblike2" :nbcom="testposterecette2.nbcom2" :id="testposterecette2.id2"
-    :listcompost="testposterecette2.post2a" />
-  <PostRecette :auteur="testposterecette3.auteur3" :titre="testposterecette3.titre3"
-    :recette="testposterecette3.recette3" :date="testposterecette3.date3" :heure="testposterecette3.heure3"
-    :nblike="testposterecette3.nblike3" :nbcom="testposterecette3.nbcom3" :id="testposterecette3.id3"
-    :listcompost="testposterecette3.post3a" /> -->
+  
 </template>
 
 <style scoped>
