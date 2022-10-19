@@ -1,5 +1,5 @@
 <script setup>
-import FoodBook from "../views/FoodBookView.vue";
+
 
 </script>
 
@@ -11,14 +11,17 @@ export default {
             // bool est utilisé pour afficher la liste des posts quand clique sur le bouton
             bool: false,
             addlike: 0,
-
+         
         };
     },
 
     //Ici ce sont les données liés à un post
-    props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "id", "listcompost"],
+    props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "click", "listcompost", "key"],
 
     methods: {
+        testemit: function() {
+    console.log("emitréussi")
+    },
         //Fonction pour afficher ou non la div contenant la liste des posts
         clickCom: function () {
             let token = JSON.parse(localStorage.getItem("tokenUserLog"));
@@ -31,17 +34,8 @@ export default {
                     this.bool = true;
             }
         },
-        //Fonction pour augmenter le nombre de like
-        // clickLike: function () {
-        //     let token = JSON.parse(localStorage.getItem("tokenUserLog"));
-
-        //     if (token == null) {
-        //         alert("Vous devez vous connectez pour pouvoir liker")
-        //     } else {
-        //         this.addlike++
-        //     }
-
-        // },
+      
+      
        
 
     },
@@ -65,9 +59,13 @@ export default {
         </div>
         <div class="footerpost">
             <div class="like">
-                <button @click="likePosts">
-                    <i class="fa-solid fa-heart"></i>
-                </button>
+                <form  action="">
+                    
+
+                    <button @click.prevent="$emit('some-event')" >
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+                </form>
                 <div class="nblike">
                     {{nblike}} <i class="fa-solid fa-heart"></i>
                 </div>
