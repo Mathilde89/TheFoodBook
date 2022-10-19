@@ -14,14 +14,15 @@ export default {
          
         };
     },
-
+    emits:
+    ["eventCom",
+    "someEvent"
+],
+    
     //Ici ce sont les données liés à un post
     props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "click", "listcompost", "key"],
 
-    methods: {
-        testemit: function() {
-    console.log("emitréussi")
-    },
+   
         //Fonction pour afficher ou non la div contenant la liste des posts
         clickCom: function () {
             let token = JSON.parse(localStorage.getItem("tokenUserLog"));
@@ -38,7 +39,7 @@ export default {
       
        
 
-    },
+    
 }
 
 
@@ -71,7 +72,7 @@ export default {
                 </div>
             </div>
             <div class="com">
-                <button @click="clickCom" class="buttoncom">
+                <button @click.prevent="$emit('eventCom')" class="buttoncom">
                     <i class="fa-solid fa-comments"></i>
                 </button>
                 <div class="nbcom">
