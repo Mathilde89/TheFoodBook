@@ -11,17 +11,16 @@ export default {
             // bool est utilisé pour afficher la liste des posts quand clique sur le bouton
             bool: false,
             addlike: 0,
-         
+
         };
     },
+    emits: ["someEvent"],
 
     //Ici ce sont les données liés à un post
     props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "click", "listcompost", "key"],
 
     methods: {
-        testemit: function() {
-    console.log("emitréussi")
-    },
+       
         //Fonction pour afficher ou non la div contenant la liste des posts
         clickCom: function () {
             let token = JSON.parse(localStorage.getItem("tokenUserLog"));
@@ -34,14 +33,12 @@ export default {
                     this.bool = true;
             }
         },
-      
-      
-       
+
+
+
 
     },
 }
-
-
 </script>
 
 <template>
@@ -59,10 +56,10 @@ export default {
         </div>
         <div class="footerpost">
             <div class="like">
-                <form  action="">
-                    
+                <form action="">
 
-                    <button @click.prevent="$emit('some-event')" >
+
+                    <button @click.prevent="$emit('someEvent')">
                         <i class="fa-solid fa-heart"></i>
                     </button>
                 </form>
@@ -283,4 +280,8 @@ form {
     justify-content: space-between;
 
 }
+
+
+
+
 </style>
