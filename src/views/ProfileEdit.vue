@@ -6,7 +6,7 @@ import PostRecette from '../components/PostRecette.vue';
 
 export default{
     data() {
-        lastName: "";
+        
         return {
             userProfilList: {},
             listPost: [],
@@ -14,10 +14,17 @@ export default{
         };
     },
     methods: {
+
         showPost: async function () {
             await this.getPosts();
             console.log("test");
-            console.log(this.listPost);
+            console.log("listpost", this.listPost);
+            console.log("userId", this.listPost[9].userId );
+            console.log("IDconnecté", this.userProfilList._id);
+            const _id = this.userProfilList._id
+            const IDconnecté = this.userProfilList.userId
+            
+            
         },
         getPosts: async function () {
             const options = {
@@ -69,8 +76,12 @@ export default{
             console.log("data:", data);
             this.result = data.success;
             console.log("userProfilList", this.userProfilList);
+
         },
     },
+    mounted: function() {
+        this.modifyProfile()
+    }
     
 };
 
@@ -96,12 +107,16 @@ export default{
             <button>modifier son profil</button>
         </form>
     </div>
-    <div class="UserPosts">
-        <button @click="showPost">teeeest</button>
-        <PostRecette
-        :titre="array"
+    <!-- <div class="UserPosts">
+        <button @click.prevent="showPost">teeeest</button>
+        <template v-for="item in this.listPost">
+        <PostRecette v-if= "this.userProfilList._id == item.userId " 
+        :titre="item.title"
+        :recette="item.content"
+
         />
-    </div>
+        </template>
+    </div> -->
 </template>
 
 <style lang="scss" scoped>
