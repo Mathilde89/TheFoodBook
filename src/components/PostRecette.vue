@@ -1,8 +1,3 @@
-<script setup>
-
-
-</script>
-
 
 <script>
 export default {
@@ -14,10 +9,7 @@ export default {
 
         };
     },
-    emits:
-    ["eventCom",
-    "someEvent"
-],
+    emits: ["eventCom","someEvent"],
     
     //Ici ce sont les données liés à un post
     props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "click", "listcompost", "key"],
@@ -41,7 +33,9 @@ export default {
 
 
     
+},
 }
+
 </script>
 
 <template>
