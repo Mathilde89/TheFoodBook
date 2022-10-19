@@ -1,6 +1,8 @@
+
 <!-- style CSS -->
 <!-- Affichage de plusieurs posts sur la page avec menu page1 sur 10-->
 <!-- Affichage  des infos du profil sur les likes et commentaires-->
+<!-- PB pour revenir sur les posts -->
 
 
 
@@ -145,20 +147,27 @@ export default {
       const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/post/like", options);
       const data = await response.json();
       console.log(data)
-    
-
+        await this.getPosts();
+      // window.location.reload();
 
 
     },
 
   },
   computed: {
-    numberLikeShow: async function () {
-      // await this.getPosts();
-      // return  this.listPost.likes
+  //   numberLikeShow: function (arg) {
+  //     // this.getPosts()
+  //     for (var i = 0; i < this.listPost.length; i++) {
+        
+  //       if (this.listPost[i]._id == arg) {
 
+  //         console.log("camarche")
+  //         return this.listPost[i].likes.length
+  //         // dans template :nblike="numberLikeShow"
 
-    },
+  //     }
+  //   };
+  // },
   },
     mounted:
       function () { this.getPosts() }
@@ -171,10 +180,6 @@ export default {
 
 <template>
   <button @click="newPost" type="submit">Créer un post</button>
-  <form  action="">
-
-    <button   type="submit">Tests</button>
-  </form>
 
   <div @submit.prevent="createPost()" v-if="ifcreateposte" class="newpost">
     <form action="">
@@ -183,10 +188,13 @@ export default {
       <button type="submit">Envoyer</button>
     </form>
   </div>
-  <PostRecette @some-event="likePosts(item._id)" v-for="item in this.listPost" :titre="item.title"
-    :recette="item.content" :nblike="item.likes.length" :key="item._id" />
-    
+  <div class="cardContainer">
 
+    <PostRecette @some-event="() => likePosts(item._id)" v-for="item in this.listPost" :titre="item.title"
+      :recette="item.content" :nblike="item.likes.length" :key="item._id" />
+      
+    </div>
+    
   
 </template>
 
@@ -204,5 +212,14 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+
+.cardContainer{
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 </style>
