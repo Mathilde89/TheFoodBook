@@ -111,7 +111,31 @@ export default {
         this.posteOK = false;
       } else this.posteOK = true;
     },
+    addComment: async function (reccupid, reccupcom) {
+      
+      let token = JSON.parse(localStorage.getItem("tokenUserLog"));
+  
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `bearer ${token}`,
+        },
+        body: JSON.stringify({
+          postId: `${reccupid}`,
+          content: `${reccupcom}`,
+        }),
+      };
+      const response = await fetch(
+        "https://social-network-api.osc-fr1.scalingo.io/foodbook/post/comment",
+        options
+      );
+      const data = await response.json();
+      await this.getPosts()
 
+      console.log(data);
+      console.log("reussi");
+    },
     // Requete pour liker les posts
     likePosts: async function (reccupid) {
       //Reccupère le token qui est dans le local storage
@@ -133,29 +157,10 @@ export default {
       );
       const data = await response.json();
       console.log(data);
-    },
-  },
-  addComment: async function () {
-    let token = JSON.parse(localStorage.getItem("tokenUserLog"));
+      await this.getPosts()
 
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `bearer ${token}`,
-      },
-      body: JSON.stringify({
-        postId: "634f8e99ccaf7f001d9235cb",
-        content: "test-commentaire",
-      }),
-    };
-    const response = await fetch(
-      "https://social-network-api.osc-fr1.scalingo.io/foodbook/post/comment",
-      options
-    );
-    const data = await response.json();
-    console.log(data);
-    console.log("reussi");
+    },
+    
   },
 
   computed: {
@@ -194,14 +199,17 @@ export default {
     </form>
   </div>
   <PostRecette
-    @eventCom="addComment()"
+  @some-event="likePosts(item._id)"
+  @send-comment="(com) => addComment(item._id,com)"
+    
     v-for="item in this.listPost"
     :titre="item.title"
     :recette="item.content"
     :nblike="item.likes.length"
     :key="item._id"
+    
+    :listcom="item.comments"
   />
-  <!-- @some-event="likePosts(item._id)" -->
 </template>
 
 <style scoped>

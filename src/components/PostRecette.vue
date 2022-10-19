@@ -6,15 +6,38 @@ export default {
             // bool est utilisé pour afficher la liste des posts quand clique sur le bouton
             bool: false,
             addlike: 0,
+            listPost:[],
+            com:""
+           
 
         };
     },
-    emits: ["eventCom","someEvent"],
+    emits: ["eventCom","someEvent","sendComment"],
+
     
     //Ici ce sont les données liés à un post
-    props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "click", "listcompost", "key"],
+    props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "click", "msgBody", "key","listcom"],
 
     methods: {
+        getPosts: async function () {
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const response = await fetch(
+        "https://social-network-api.osc-fr1.scalingo.io/foodbook/posts?page=0&limit=10",
+        options
+      );
+      const data = await response.json();
+
+      this.listPost = data.posts;
+
+      console.log(this.listPost);
+     
+    },
+        
        
         //Fonction pour afficher ou non la div contenant la liste des posts
         clickCom: function () {
@@ -29,6 +52,7 @@ export default {
             }
         },
 
+      
 
 
 
@@ -65,7 +89,7 @@ export default {
                 </div>
             </div>
             <div class="com">
-                <button @click.prevent="$emit('eventCom')" class="buttoncom">
+                <button @click="clickCom"  class="buttoncom">
                     <i class="fa-solid fa-comments"></i>
                 </button>
                 <div class="nbcom">
@@ -80,12 +104,12 @@ export default {
     </div>
     <div v-if="bool" class="listcomcontainer">
         <form action="">
-            <input type="text" placeholder="A vos commentaires!">
-            <button class="buttoncomvalid">
+            <input v-model="this.com" type="text" placeholder="A vos commentaires!">
+            <button @click.prevent="$emit('sendComment',this.com)" class="buttoncomvalid">
                 <i class="fa-solid fa-share"></i>
             </button>
         </form>
-        <div class="listcom">
+        <div  v-for="item in listcom" class="listcom">
 
             <div class="auteurdate">
 
@@ -93,7 +117,7 @@ export default {
 
             </div>
             <p>
-                {{listcompost}}
+                {{item.content}}
             </p>
 
         </div>
