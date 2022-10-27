@@ -133,25 +133,35 @@ export default {
     likePosts: async function (reccupid) {
       //Reccupère le token qui est dans le local storage
       let token = JSON.parse(localStorage.getItem("tokenUserLog"));
+      if(token!=null){
 
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `bearer ${token}`,
-        },
-        body: JSON.stringify({
-          postId: `${reccupid}`,
-        }),
-      };
-      const response = await fetch(
-        "https://social-network-api.osc-fr1.scalingo.io/foodbook/post/like",
-        options
-      );
-      const data = await response.json();
-      console.log(data);
-      await this.getPosts()
+        
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `bearer ${token}`,
+          },
+          body: JSON.stringify({
+            postId: `${reccupid}`,
+          }),
+        };
+        const response = await fetch(
+          "https://social-network-api.osc-fr1.scalingo.io/foodbook/post/like",
+          options
+          );
+          const data = await response.json();
+          console.log(data);
+          if(data.success==false){
+            alert("Vous avez déjà liker ce post")
+          } else {
 
+            await this.getPosts()
+          }
+          
+        } else {
+          alert("Vous devez vous connecter pour pouvoir liker")
+        }
     },
 
   },

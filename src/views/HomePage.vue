@@ -1,18 +1,15 @@
-<!-- <script setup>
-import Navbar from "../components/NavBar.vue"
-import HomeContent from "../components/HomeContent.vue"
-import FooterContent from "../components/FooterContent.vue";
+<script setup>
+import FoodBookView from "../views/FoodBookView.vue";
+import HomeContent from "../components/HomeContent.vue";
 </script>
 
+  <!-- <RouterView /> -->
 <template>
-
-    <div>
-        <Navbar/>
-    </div>
-    <div>
-        <HomeContent/>
-    </div>
-    <div>
-        <FooterContent/>
-    </div>
-</template> -->
+  <div>
+    <HomeContent/>
+  </div>
+  <div class="cardContainer" id="cardContainer">
+    <FoodBookView/>
+  </div>
+</template>
+   

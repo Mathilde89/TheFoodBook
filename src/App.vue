@@ -28,21 +28,11 @@ export default {
   </header> 
 
  
-  <div>
+  <!-- <div>
     <HomeContent/>
-  </div>
+  </div> -->
 
   
-  <!-- <RouterView /> -->
-  <div class="cardContainer" id="cardContainer">
-    <FoodBookView/>
-  </div>
-   
-
-
-   
-
-
  <footer>
   <FooterContent/>
   </footer>

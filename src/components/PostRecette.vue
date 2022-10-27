@@ -143,7 +143,7 @@ $colorPrimary: #A52A2A;
 $colorGreyLight: #D3D3D3;
 $colorGreyMedium: #A9A9A9;
 $colorGreyDark: #353535;
-$taillewidhtpost: 500px;
+$taillewidhtpost: 370px;
 
 .post {
     width: $taillewidhtpost;
