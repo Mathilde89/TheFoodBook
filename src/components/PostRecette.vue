@@ -63,6 +63,10 @@ export default {
 </script>
 
 <template>
+    <div class="complete">
+
+    
+
     <div class="post">
 
         <div class="tittle">
@@ -127,6 +131,7 @@ export default {
 
 
     </div>
+</div>
 </template>
 
 
