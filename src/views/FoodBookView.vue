@@ -14,31 +14,33 @@ export default {
   data() {
     return {
       listPost: [],
-      liketest: 2,
       ifcreateposte: false,
       posteOK: false,
       infoPost: {
-        auteur: "",
         titre: "",
         recette: "",
-        date: "",
-        heure: "",
-        nblike: "",
-        nbcom: "",
-        id: "",
       },
       listCom: [],
     };
   },
 
   methods: {
-    testemit: function () {
-      console.log("emitréussi");
-    },
+   
     newPost: function () {
-      if (this.ifcreateposte == true) {
-        this.ifcreateposte = false;
-      } else this.ifcreateposte = true;
+      let token = JSON.parse(localStorage.getItem("tokenUserLog"));
+      console.log(token)
+      if (token == null) {
+        alert("Vous devez vous connecter pour pouvoir poster")
+        console.log("tata")
+        
+      } 
+      else {
+        
+        if (this.ifcreateposte == true) {
+          this.ifcreateposte = false;
+        } else this.ifcreateposte = true;
+        console.log("toto")
+      }
     },
     postAffiche: function (e) {
       e.preventDefault();
@@ -62,9 +64,8 @@ export default {
       const data = await response.json();
 
       this.listPost = data.posts;
+      console.log(data)
 
-      console.log(this.listPost);
-      console.log(this.liketest);
     },
 
     // Requete pour créer un post
@@ -96,25 +97,19 @@ export default {
 
       if (data.success) {
         await this.getPosts();
+        
       } else {
         alert("Veuillez vous inscrire");
       }
 
       this.listPost.push(infoPost);
-      console.log("increate", this.listPost);
-
-      // this.listPost.forEach(element => console.log(element));
-      // this.listPost.forEach(element => this.likePosts(element._id));
-
-      this.posteOK = true;
-      if (this.posteOK == true) {
-        this.posteOK = false;
-      } else this.posteOK = true;
+      this.ifcreateposte=false;
+    
     },
     addComment: async function (reccupid, reccupcom) {
-      
+
       let token = JSON.parse(localStorage.getItem("tokenUserLog"));
-  
+
       const options = {
         method: "POST",
         headers: {
@@ -133,8 +128,6 @@ export default {
       const data = await response.json();
       await this.getPosts()
 
-      console.log(data);
-      console.log("reussi");
     },
     // Requete pour liker les posts
     likePosts: async function (reccupid) {
@@ -160,23 +153,11 @@ export default {
       await this.getPosts()
 
     },
-    
+
   },
 
   computed: {
-  //   numberLikeShow: function (arg) {
-  //     // this.getPosts()
-  //     for (var i = 0; i < this.listPost.length; i++) {
-        
-  //       if (this.listPost[i]._id == arg) {
-
-  //         console.log("camarche")
-  //         return this.listPost[i].likes.length
-  //         // dans template :nblike="numberLikeShow"
-
-  //     }
-  //   };
-  // },
+  
   },
   mounted: function () {
     this.getPosts();
@@ -185,34 +166,27 @@ export default {
 </script>
 
 <template>
-  <button @click="newPost" type="submit">Créer un post</button>
+  <div class="inputcreate">
 
-  <div @submit.prevent="createPost()" v-if="ifcreateposte" class="newpost">
-    <form action="">
-      <input v-model="this.infoPost.titre" type="text" placeholder="titre" />
-      <input
-        v-model="this.infoPost.recette"
-        type="text"
-        placeholder="recette"
-      />
-      <button type="submit">Envoyer</button>
-    </form>
+    <button @click="newPost" type="submit">Créer un post</button>
+    <div  v-if="ifcreateposte" >
+      <form @submit.prevent="createPost()" action="" class="newpost">
+        <input v-model="this.infoPost.titre" type="text" placeholder="Titre" />
+        <input v-model="this.infoPost.recette" type="text" placeholder="Recette" class="inprecette"/>
+        <button type="submit">Envoyer</button>
+      </form>
+    </div>
   </div>
-  <PostRecette
-  @some-event="likePosts(item._id)"
-  @send-comment="(com) => addComment(item._id,com)"
+  <div class="container">
+
     
-    v-for="item in this.listPost"
-    :titre="item.title"
-    :recette="item.content"
-    :nblike="item.likes.length"
-    :key="item._id"
-    
-    :listcom="item.comments"
-  />
+    <PostRecette @some-event="likePosts(item._id)" @send-comment="(com) => addComment(item._id,com)"
+      v-for="item in this.listPost" :titre="item.title" :recette="item.content" :nblike="item.likes.length" :nbcom="item.comments.length"
+      :key="item._id" :listcom="item.comments" />
+    </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 button {
   width: 100px;
   height: 50px;
@@ -222,18 +196,40 @@ button {
   font-size: 0, 6em;
 }
 
-.nvPost {
+.inputcreate{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-
-
-.cardContainer{
-  display: flex;
-  flex-direction: row;
-  margin-top: 30px;
-  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  padding:20px;
+  margin:10px;
 }
+.newpost{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding:20px;
+  margin:10px;
+  input{
+    margin:10px;
+    width: 400px;
+
+  }
+  .inprecette{
+    height: 150px;
+
+  }
+ 
+  
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+  }
+ 
 </style>

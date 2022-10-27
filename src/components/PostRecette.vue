@@ -113,7 +113,7 @@ export default {
 
             <div class="auteurdate">
 
-                <h1>{{auteur}}</h1> a écrit le {{date}} à {{heure}} :
+                <h1>{{item.firstname}}</h1> a écrit   :
 
             </div>
             <p>
@@ -253,7 +253,7 @@ button {
 
 .listcomcontainer {
     width: $taillewidhtpost;
-    height: 200px;
+    height: auto;
     border: 1px solid $colorPrimary;
     padding: 20px;
     border-radius: 10px;
@@ -266,8 +266,9 @@ button {
     display: flex;
     flex-direction: column;
     border: 1px solid $colorPrimary;
-    padding: 5px;
+    // padding: 5px;
     border-radius: 10px;
+    margin:5px;
 
     h1 {
         font-size: 15px;
