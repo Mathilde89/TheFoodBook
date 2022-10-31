@@ -7,7 +7,7 @@
 
 <script setup>
 import PostRecette from "../components/PostRecette.vue";
-import { getPosts } from "../lib/posts";
+// import { getPosts } from "../lib/posts";
 </script>
 
 <script>
@@ -65,7 +65,7 @@ export default {
       const data = await response.json();
 
       this.listPost = data.posts;
-      console.log(data)
+      console.log("toto")
 
     },
 
