@@ -7,6 +7,7 @@
 
 <script setup>
 import PostRecette from "../components/PostRecette.vue";
+import { getPosts } from "../lib/posts";
 </script>
 
 <script>
