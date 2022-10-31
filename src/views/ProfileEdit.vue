@@ -1,8 +1,10 @@
 <script setup>
 import PostRecette from '../components/PostRecette.vue';
+import { getPosts } from "../lib/posts";
 </script>
 
 <script>
+
 
 export default{
     data() {
@@ -17,7 +19,7 @@ export default{
         
 
         showPost: async function () {
-            await this.getPosts();
+            this.listPost = await getPosts();
             
            
              const _id = this.userProfilList._id
@@ -26,19 +28,26 @@ export default{
             
             
         },
-        getPosts: async function () {
-            const options = {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            };
-            const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/posts?page=0&limit=10", options);
-            const data = await response.json();
-            this.listPost = data.posts;
+        // getPosts: async function (){
+            
+        //     this.listPost = await getPosts();
+        //     console.log("listpost", this.listPost);
+        // },
+        
+        // getPosts: async function () {
+        //     const options = {
+        //         method: "GET",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         },
+        //     };
+        //     const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/posts?page=0&limit=10", options);
+        //     const data = await response.json();
+        //     this.listPost = data.posts;
             
             
-        },
+        // },
+
         modifyProfile: async function () {
             let token = JSON.parse(localStorage.getItem("tokenUserLog"));
             // console.log(token);
