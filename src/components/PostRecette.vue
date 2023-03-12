@@ -1,25 +1,33 @@
-
 <script>
 export default {
-    data() {
-        return {
-            // bool est utilisé pour afficher la liste des posts quand clique sur le bouton
-            bool: false,
-            addlike: 0,
-            listPost:[],
-            com:""
-           
+  data() {
+    return {
+      // bool est utilisé pour afficher la liste des posts quand clique sur le bouton
+      bool: false,
+      addlike: 0,
+      listPost: [],
+      com: "",
+    };
+  },
+  emits: ["eventCom", "someEvent", "sendComment"],
 
-        };
-    },
-    emits: ["eventCom","someEvent","sendComment"],
+  //Ici ce sont les données liés à un post
+  props: [
+    "auteur",
+    "titre",
+    "recette",
+    "date",
+    "heure",
+    "nblike",
+    "nbcom",
+    "click",
+    "msgBody",
+    "key",
+    "listcom",
+  ],
 
-    
-    //Ici ce sont les données liés à un post
-    props: ["auteur", "titre", "recette", "date", "heure", "nblike", "nbcom", "click", "msgBody", "key","listcom"],
-
-    methods: {
-        getPosts: async function () {
+  methods: {
+    getPosts: async function () {
       const options = {
         method: "GET",
         headers: {
@@ -35,280 +43,217 @@ export default {
       this.listPost = data.posts;
 
       console.log(this.listPost);
-     
     },
-        
-       
-        //Fonction pour afficher ou non la div contenant la liste des posts
-        clickCom: function () {
-            let token = JSON.parse(localStorage.getItem("tokenUserLog"));
-            if (token == null) {
-                alert("Vous devez vous connectez pour pouvoir commenter")
-            } else {
-                if (this.bool == true) {
-                    this.bool = false;
-                } else
-                    this.bool = true;
-            }
-        },
 
-      
-
-
-
-    
-},
-}
-
+    //Fonction pour afficher ou non la div contenant la liste des posts
+    clickCom: function () {
+      let token = JSON.parse(localStorage.getItem("tokenUserLog"));
+      if (token == null) {
+        alert("Vous devez vous connectez pour pouvoir commenter");
+      } else {
+        if (this.bool == true) {
+          this.bool = false;
+        } else this.bool = true;
+      }
+    },
+  },
+};
 </script>
 
 <template>
-    <div class="complete">
-
     
-
-    <div class="post">
-
-        <div class="tittle">
-            {{titre}}
-
-        </div>
-        <div class="recette">
-            <p>
-                {{recette}}
-            </p>
-
-        </div>
-        <div class="footerpost">
-            <div class="like">
-                <form action="">
-
-
-                    <button @click.prevent="$emit('someEvent')">
-                        <i class="fa-solid fa-heart"></i>
-                    </button>
-                </form>
-                <div class="nblike">
-                    {{nblike}} <i class="fa-solid fa-heart"></i>
-                </div>
+    
+  <div class="main">
+    <ul class="cards">
+      <li class="cards_item">
+        <div class="card">
+          <div class="card_image">
+            <img
+              src="https://assets.codepen.io/652/photo-1468777675496-5782faaea55b.jpeg"
+              alt="mixed vegetable salad in a mason jar."
+            />
+          </div>
+          <div class="card_content">
+            <h2 class="card_title"> {{ titre }}</h2>
+            <div class="card_text">
+              <p>
+                {{ recette }}
+              </p>
             </div>
-            <div class="com">
-                <button @click="clickCom"  class="buttoncom">
-                    <i class="fa-solid fa-comments"></i>
-                </button>
-                <div class="nbcom">
-                    {{nbcom}} commentaires
-                </div>
-
-            </div>
-
-
-
-        </div>
-    </div>
-    <div v-if="bool" class="listcomcontainer">
-        <form action="">
-            <input v-model="this.com" type="text" placeholder="A vos commentaires!">
-            <button @click.prevent="$emit('sendComment',this.com)" class="buttoncomvalid">
-                <i class="fa-solid fa-share"></i>
+            <div class="footerpost">
+        <div class="like">
+          <form action="">
+            <button @click.prevent="$emit('someEvent')">
+              <i class="fa-solid fa-heart"></i>
             </button>
-        </form>
-        <div  v-for="item in listcom" class="listcom">
-
-            <div class="auteurdate">
-
-                <h1>{{item.firstname}}</h1> a écrit   :
-
-            </div>
-            <p>
-                {{item.content}}
-            </p>
-
+          </form>
+          <div class="nblike">
+            {{ nblike }} <i class="fa-solid fa-heart"></i>
+          </div>
         </div>
-
-
-
-
-
+        <div class="com">
+          <button @click="clickCom" class="buttoncom">
+            <i class="fa-solid fa-comments"></i>
+          </button>
+          <div class="nbcom">{{ nbcom }} commentaires</div>
+        </div>
+      </div>
+      <div v-if="bool" class="listcomcontainer">
+      <form action="">
+        <input
+          v-model="this.com"
+          type="text"
+          placeholder="A vos commentaires!"
+        />
+        <button
+          @click.prevent="$emit('sendComment', this.com)"
+          class="buttoncomvalid"
+        >
+          <i class="fa-solid fa-share"></i>
+        </button>
+      </form>
+      <div v-for="item in listcom" class="listcom">
+        <div class="auteurdate">
+          <h2>{{ item.firstname }}</h2>
+          a écrit :
+        </div>
+        <p>
+          {{ item.content }}
+        </p>
+      </div>
     </div>
-</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
-
 <style lang="scss" scoped>
-* {
-    box-sizing: border-box;
-}
-
 body {
-    margin: 0;
+  font-family: "Oxygen", sans-serif;
+  color: #050505;
 }
 
-$colorPrimary: #A52A2A;
-$colorGreyLight: #D3D3D3;
-$colorGreyMedium: #A9A9A9;
-$colorGreyDark: #353535;
-$taillewidhtpost: 370px;
-
-.post {
-    width: $taillewidhtpost;
-    text-align: center;
-    height: 300px;
-    background-color: $colorGreyLight;
-    padding: 20px;
-    margin: 5px 20px;
-    border-radius: 10px;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.tittle {
-    color: $colorPrimary;
-    height: 10%;
-    width: 100%;
-    font-size: larger;
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.cardContainer {
-    display: flex;
-    flex-direction: row;
-    margin-top: 30px;
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.recette {
-    height: 70%;
-    width: 100%;
-    background-color: white;
-    border-radius: 10px;
-
-    p {
-        padding: 10px;
-    }
-
+.cards_item {
+  display: flex;
+  padding: 1rem;
 }
 
-.footerpost {
-    height: 20%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-
+.card_image {
+  position: relative;
+  max-height: 250px;
 }
 
-.com {
-    height: 100%;
+.card_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+@media (min-width: 40rem) {
+  .cards_item {
     width: 50%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  }
 }
 
-.like {
-    height: 100%;
-    width: 50%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-
-
+@media (min-width: 56rem) {
+  .cards_item {
+    width:70%;
+  }
 }
 
-button {
-    width: 40px;
-    height: 40px;
-    margin: 5px;
-    justify-content: flex-end;
-    display: block;
-    color: #fff;
-    background: $colorGreyDark;
-    font-size: 1em;
-    font-weight: bold;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    transition: 0.2s ease-in;
-    cursor: pointer;
-
-    &:hover {
-        color: $colorPrimary;
-        background: white;
-        border: $colorGreyDark 1px solid;
-
-    }
+.card {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-
-.nblike {
-
-    align-items: center;
-    vertical-align: flex-start;
-    width: 40%;
-    color: #A52A2A;
+.card_content {
+  position: relative;
+  padding: 16px 12px 32px 24px;
+  margin: 16px 8px 8px 0;
+  max-height: 290px;
+  overflow-y: scroll;
 }
 
-.com {
-
-    align-items: center;
-    vertical-align: flex-start;
-    width: 40%;
-    color: $colorGreyDark;
+.card_content::-webkit-scrollbar {
+  width: 8px;
 }
 
-.listcomcontainer {
-    width: $taillewidhtpost;
-    height: auto;
-    border: 1px solid $colorPrimary;
-    padding: 20px;
-    border-radius: 10px;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+.card_content::-webkit-scrollbar-track {
+  box-shadow: 0;
+  border-radius: 0;
 }
 
-.listcom {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid $colorPrimary;
-    // padding: 5px;
-    border-radius: 10px;
-    margin:5px;
-
-    h1 {
-        font-size: 15px;
-        margin-right: 10px;
-    }
-
+.card_content::-webkit-scrollbar-thumb {
+  background: #c89b3f;
+  border-radius: 15px;
 }
 
-.auteurdate {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    font-size: 12px;
-
+.card_title {
+  position: relative;
+  margin: 0 0 24px;
+  padding-bottom: 10px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
 }
 
-input {
-    width: 85%;
-    height: 40px;
-    border: 1px solid $colorGreyDark;
-    border-radius: 10px;
-    outline: none;
-    padding: 5px;
-
+.card_title::after {
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #c89b3f;
+  content: "";
 }
 
-form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-
+hr {
+  margin: 24px auto;
+  width: 50px;
+  border-top: 2px solid #c89b3f;
 }
 
+.card_text p {
+  margin: 0 0 24px;
+  font-size: 14px;
+  line-height: 1.5;
+}
 
+.card_text p:last-child {
+  margin: 0;
+}
+button{margin-top: 10px;}
 
+i{margin-top: 10px;}
 
+.nbcom{margin-top: 10px;}
 </style>
