@@ -1,26 +1,25 @@
 <script>
-
-
-
-export default  {
-
+export default {
   data() {
     return {
-      infoUser: { lastName: "", firstName: "", email: "", password: "", result: null, token: "", },
+      infoUser: {
+        lastName: "",
+        firstName: "",
+        email: "",
+        password: "",
+        result: null,
+        token: "",
+      },
       ListUser: [],
-
-
     };
   },
   methods: {
-
     // Requete pour s'enregistrer
     GetRegister: async function () {
-
       const options = {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: this.infoUser.email,
@@ -29,99 +28,111 @@ export default  {
           lastname: this.infoUser.lastName,
         }),
       };
-      const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/register", options);
+      const response = await fetch(
+        "https://social-network-api.osc-fr1.scalingo.io/foodbook/register",
+        options
+      );
       const data = await response.json();
-      console.log("data", data)
+      console.log("data", data);
       this.result = data.success;
-      console.log("infoUser", this.infoUser)
-
+      console.log("infoUser", this.infoUser);
     },
 
     // Requete pour se connecter
     GetLogin: async function () {
-
       const options = {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: this.infoUser.email,
           password: this.infoUser.password,
-
         }),
       };
-      const response = await fetch("https://social-network-api.osc-fr1.scalingo.io/foodbook/login", options);
+      const response = await fetch(
+        "https://social-network-api.osc-fr1.scalingo.io/foodbook/login",
+        options
+      );
       const data = await response.json();
-      console.log("data", data)
+      console.log("data", data);
       this.infoUser.result = data.success;
       this.infoUser.token = data.token;
-      console.log("infoUser", this.infoUser)
+      console.log("infoUser", this.infoUser);
       if (data.success == true) {
-
         // Mise dans le local storage
-        localStorage.setItem("tokenUserLog", JSON.stringify(this.infoUser.token));
-        alert("Connexion réussie")
+        localStorage.setItem(
+          "tokenUserLog",
+          JSON.stringify(this.infoUser.token)
+        );
+        alert("Connexion réussie");
         // redirrige vers la page des posts
-        this.$router.push('/thefoodbook');
-
-      } else
-        alert("Identifiant ou mot de passe erroné")
-
-
+        this.$router.push("/Post");
+      } else alert("Identifiant ou mot de passe erroné");
     },
-
-
-
   },
 };
-
-
 </script>
 
 <template>
-
-
-
   <body>
-  
     <div class="main">
       <input type="checkbox" id="chk" aria-hidden="true" />
 
       <div class="signup">
         <form @submit.prevent="GetRegister()">
           <label for="chk" aria-hidden="true">Inscription</label>
-          <input v-model="this.infoUser.lastName" type="text" name="txt" placeholder="Nom" />
-          <input v-model="this.infoUser.firstName" type="text" name="txt" placeholder="Prenom" />
-          <input v-model="this.infoUser.email" type="email" name="email" placeholder="Email" />
-          <input v-model="this.infoUser.password" type="password" name="pswd" placeholder="Mot De Passe" />
+          <input
+            v-model="this.infoUser.lastName"
+            type="text"
+            name="txt"
+            placeholder="Nom"
+          />
+          <input
+            v-model="this.infoUser.firstName"
+            type="text"
+            name="txt"
+            placeholder="Prenom"
+          />
+          <input
+            v-model="this.infoUser.email"
+            type="email"
+            name="email"
+            placeholder="Email"
+          />
+          <input
+            v-model="this.infoUser.password"
+            type="password"
+            name="pswd"
+            placeholder="Mot De Passe"
+          />
           <button type="submit">Valider</button>
-
         </form>
       </div>
 
       <div class="login">
-
-        <form @submit.prevent="GetLogin()" >
-         
+        <form @submit.prevent="GetLogin()">
           <label for="chk" aria-hidden="true">Connexion</label>
-          <input v-model="this.infoUser.email" type="email" name="email" placeholder="Email" />
-          <input v-model="this.infoUser.password" type="password" name="pswd" placeholder="Mot De Passe" />
+          <input
+            v-model="this.infoUser.email"
+            type="email"
+            name="email"
+            placeholder="Email"
+          />
+          <input
+            v-model="this.infoUser.password"
+            type="password"
+            name="pswd"
+            placeholder="Mot De Passe"
+          />
           <button>Connexion</button>
-          
-
         </form>
       </div>
     </div>
-
   </body>
 </template>
 
-
-
-
-
-<style scoped lang=scss>
+<style scoped lang="scss">
 body {
   margin: 0;
   padding: 0;
@@ -138,8 +149,7 @@ body {
   height: 500px;
   background: #a9a9a9;
   overflow: hidden;
-  /* background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38")
-    no-repeat center/ cover; */
+
   border-radius: 10px;
   box-shadow: 5px 20px 50px #000;
 }
@@ -213,15 +223,15 @@ button:hover {
   transform: scale(0.6);
 }
 
-#chk:checked~.login {
+#chk:checked ~ .login {
   transform: translateY(-500px);
 }
 
-#chk:checked~.login label {
+#chk:checked ~ .login label {
   transform: scale(1);
 }
 
-#chk:checked~.signup label {
+#chk:checked ~ .signup label {
   transform: scale(0.6);
 }
 </style>

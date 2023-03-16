@@ -4,7 +4,9 @@
       <nav class="navCss">
         <img class="logoNav" src="../img/logo.png">
         <RouterLink class="routerLink" to="/">Home</RouterLink>
-        <a href="#cardContainer">Posts</a>
+        <RouterLink class="routerLink" to="/Post">poste</RouterLink>
+        <!-- <a href="#cardContainer">Posts</a> -->
+
         <RouterLink v-if="isUserConnected" class="routerLink" to="/ProfileEdit">Mon Profil</RouterLink>
         <RouterLink v-if="isUserConnected" class="routerLink" to="/" @click="disconected">Se déconnecter</RouterLink>
         <RouterLink v-else class="routerLink" to="/inscription">join/log</RouterLink> 
